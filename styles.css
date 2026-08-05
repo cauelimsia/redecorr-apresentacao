@@ -79,11 +79,87 @@ sup {
   flex: none;
 }
 
+/* ---------- Camadas de fundo ---------- */
+
+#bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: var(--ink);
+  transition: background-color 0.55s ease;
+}
+
+#fx {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  display: block;
+}
+
+/* Com a cena ativa, os diagramas SVG saem: o pentágono e a rede da capa
+   passam a ser o objeto 3D. Sem WebGL, os SVGs continuam no lugar. */
+.fx-on .slide--core .col-visual,
+.fx-on .cover-net {
+  display: none;
+}
+
+/* O brilho azul competia com as partículas; a cena já ilumina o slide. */
+.fx-on .bg-glow {
+  opacity: 0.18;
+}
+
+/* Rótulos dos pilares presos aos nós do pentágono 3D */
+
+.fx-labels {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.fx-labels.is-on {
+  opacity: 1;
+}
+
+.fx-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.55);
+  transition: color 0.4s ease, text-shadow 0.4s ease;
+}
+
+body.theme-light .fx-label {
+  color: var(--slate-soft);
+}
+
+.fx-label.is-focus {
+  color: #fff;
+  text-shadow: 0 0 18px rgba(110, 168, 255, 0.9);
+}
+
+body.theme-light .fx-label.is-focus {
+  color: var(--blue);
+  text-shadow: none;
+}
+
 /* ---------- Deck / slides ---------- */
 
 .deck {
   position: fixed;
   inset: 0;
+  z-index: 2;
 }
 
 .slide {
@@ -104,13 +180,12 @@ sup {
   opacity: 1;
 }
 
+/* A cor vive em #bg; o slide só carrega a cor de texto. */
 .slide--light {
-  background: var(--paper);
   color: var(--ink);
 }
 
 .slide--dark {
-  background: var(--ink);
   color: #fff;
 }
 

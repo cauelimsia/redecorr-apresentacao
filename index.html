@@ -28,6 +28,24 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <!-- Camada de fundo: cor do slide vive aqui, não no slide, para que a
+         cena 3D fique entre o fundo e o conteúdo — e para que a troca
+         claro/escuro seja um crossfade e não um corte. -->
+    <div id="bg" aria-hidden="true"></div>
+
+    <!-- Organismo CORE5®: cena WebGL que atravessa o deck inteiro -->
+    <canvas id="fx" aria-hidden="true"></canvas>
+
+    <!-- Rótulos dos pilares: HTML posicionado a cada quadro sobre os nós
+         do pentágono 3D, para que o texto continue nítido e selecionável. -->
+    <div class="fx-labels" data-fx-labels aria-hidden="true">
+      <span class="fx-label" data-node="0">Tecnologia</span>
+      <span class="fx-label" data-node="1">Capacitação</span>
+      <span class="fx-label" data-node="2">Marketing</span>
+      <span class="fx-label" data-node="3">Oportunidades</span>
+      <span class="fx-label" data-node="4">Performance</span>
+    </div>
+
     <!-- ============ HUD ============ -->
     <header class="hud hud--top">
       <div class="brand">
@@ -56,7 +74,7 @@
 
     <main id="deck" class="deck" aria-live="polite">
       <!-- ===== 1 · CAPA ===== -->
-      <section class="slide slide--dark slide--cover" data-title="Capa" data-chapter="Abertura">
+      <section class="slide slide--dark slide--cover" data-title="Capa" data-fx="constellation" data-chapter="Abertura">
         <div class="bg-grid" aria-hidden="true"></div>
         <div class="bg-glow bg-glow--blue" aria-hidden="true"></div>
         <svg class="cover-net" viewBox="0 0 600 600" aria-hidden="true">
@@ -98,7 +116,7 @@
       </section>
 
       <!-- ===== 2 · AGENDA ===== -->
-      <section class="slide slide--light" data-title="Agenda" data-chapter="Abertura">
+      <section class="slide slide--light" data-title="Agenda" data-fx="constellation" data-fx-dim="1" data-chapter="Abertura">
         <div class="slide-inner">
           <p class="eyebrow" data-r>Agenda</p>
           <h2 class="display" data-r>O que você vai ver <em>nos próximos minutos.</em></h2>
@@ -138,7 +156,7 @@
       <!-- ===== 3 · DIVISOR 01 ===== -->
       <section
         class="slide slide--dark slide--chapter"
-        data-title="Capítulo 01 · O cenário"
+        data-title="Capítulo 01 · O cenário" data-fx="constellation"
         data-chapter="O cenário"
       >
         <div class="bg-grid" aria-hidden="true"></div>
@@ -155,7 +173,7 @@
       </section>
 
       <!-- ===== 4 · MERCADO ===== -->
-      <section class="slide slide--light" data-title="O mercado" data-chapter="O cenário">
+      <section class="slide slide--light" data-title="O mercado" data-fx="grid" data-chapter="O cenário">
         <div class="slide-inner">
           <p class="eyebrow" data-r>O mercado</p>
           <h2 class="display" data-r>Nunca houve tanta gente <em>para atender.</em></h2>
@@ -184,7 +202,7 @@
       </section>
 
       <!-- ===== 5 · O CORRETOR SOZINHO ===== -->
-      <section class="slide slide--light" data-title="O corretor sozinho" data-chapter="O cenário">
+      <section class="slide slide--light" data-title="O corretor sozinho" data-fx="chaos" data-chapter="O cenário">
         <div class="slide-inner slide-inner--split">
           <div class="col-text">
             <p class="eyebrow" data-r>O ponto de partida</p>
@@ -252,7 +270,7 @@
       </section>
 
       <!-- ===== 6 · POSICIONAMENTO ===== -->
-      <section class="slide slide--dark" data-title="Posicionamento" data-chapter="O cenário">
+      <section class="slide slide--dark" data-title="Posicionamento" data-fx-x="center" data-fx="pentagon" data-chapter="O cenário">
         <div class="bg-grid" aria-hidden="true"></div>
         <div class="slide-inner slide-inner--center">
           <h2 class="display display--big">
@@ -268,7 +286,7 @@
       </section>
 
       <!-- ===== 7 · QUEM SOMOS ===== -->
-      <section class="slide slide--light" data-title="Quem somos" data-chapter="O cenário">
+      <section class="slide slide--light" data-title="Quem somos" data-fx="constellation" data-fx-dim="1" data-chapter="O cenário">
         <div class="slide-inner slide-inner--split">
           <div class="col-text">
             <p class="eyebrow" data-r>Quem somos</p>
@@ -336,7 +354,7 @@
       <!-- ===== 8 · DIVISOR 02 ===== -->
       <section
         class="slide slide--dark slide--chapter"
-        data-title="Capítulo 02 · A metodologia"
+        data-title="Capítulo 02 · A metodologia" data-fx-x="center" data-fx="pentagon"
         data-chapter="A metodologia"
       >
         <div class="bg-grid" aria-hidden="true"></div>
@@ -355,7 +373,7 @@
       <!-- ===== 9 · CORE5 ===== -->
       <section
         class="slide slide--dark slide--core"
-        data-title="CORE5® · visão geral"
+        data-title="CORE5® · visão geral" data-fx="pentagon"
         data-chapter="A metodologia"
       >
         <div class="bg-glow bg-glow--center" aria-hidden="true"></div>
@@ -421,7 +439,7 @@
       <!-- ===== 10 · PILAR 1 ===== -->
       <section
         class="slide slide--light"
-        data-title="Pilar 1 · Tecnologia"
+        data-title="Pilar 1 · Tecnologia" data-fx-dim="1" data-fx="pentagon" data-fx-focus="1"
         data-chapter="A metodologia"
         data-pilar="1"
       >
@@ -521,7 +539,7 @@
       <!-- ===== 11 · PILAR 2 ===== -->
       <section
         class="slide slide--light"
-        data-title="Pilar 2 · Capacitação"
+        data-title="Pilar 2 · Capacitação" data-fx-dim="1" data-fx="pentagon" data-fx-focus="2"
         data-chapter="A metodologia"
         data-pilar="2"
       >
@@ -574,7 +592,7 @@
       <!-- ===== 12 · PILAR 3 ===== -->
       <section
         class="slide slide--light"
-        data-title="Pilar 3 · Marketing"
+        data-title="Pilar 3 · Marketing" data-fx-dim="1" data-fx="pentagon" data-fx-focus="3"
         data-chapter="A metodologia"
         data-pilar="3"
       >
@@ -633,7 +651,7 @@
       <!-- ===== 13 · PILAR 4 ===== -->
       <section
         class="slide slide--light"
-        data-title="Pilar 4 · Oportunidades"
+        data-title="Pilar 4 · Oportunidades" data-fx-dim="1" data-fx="pentagon" data-fx-focus="4"
         data-chapter="A metodologia"
         data-pilar="4"
       >
@@ -683,7 +701,7 @@
       <!-- ===== 14 · PILAR 5 ===== -->
       <section
         class="slide slide--light"
-        data-title="Pilar 5 · Performance"
+        data-title="Pilar 5 · Performance" data-fx-dim="1" data-fx="pentagon" data-fx-focus="5"
         data-chapter="A metodologia"
         data-pilar="5"
       >
@@ -741,7 +759,7 @@
       <!-- ===== 15 · DIVISOR 03 ===== -->
       <section
         class="slide slide--dark slide--chapter"
-        data-title="Capítulo 03 · As plataformas"
+        data-title="Capítulo 03 · As plataformas" data-fx="constellation"
         data-chapter="As plataformas"
       >
         <div class="bg-grid" aria-hidden="true"></div>
@@ -760,7 +778,7 @@
       <!-- ===== 16 · ARQUITETURA DO ECOSSISTEMA ===== -->
       <section
         class="slide slide--dark"
-        data-title="Arquitetura do ecossistema"
+        data-title="Arquitetura do ecossistema" data-fx="constellation"
         data-chapter="As plataformas"
       >
         <div class="bg-grid" aria-hidden="true"></div>
@@ -809,7 +827,7 @@
       </section>
 
       <!-- ===== 17 · CRM ===== -->
-      <section class="slide slide--light" data-title="CRM" data-chapter="As plataformas">
+      <section class="slide slide--light" data-title="CRM" data-fx="constellation" data-fx-dim="1" data-chapter="As plataformas">
         <div class="slide-inner slide-inner--split">
           <div class="col-text">
             <p class="eyebrow" data-r>Plataforma 1 · CRM</p>
@@ -888,7 +906,7 @@
       <!-- ===== 17 · ACADEMIA ===== -->
       <section
         class="slide slide--light"
-        data-title="Academia de Vendas"
+        data-title="Academia de Vendas" data-fx="constellation" data-fx-dim="1"
         data-chapter="As plataformas"
       >
         <div class="slide-inner slide-inner--split">
@@ -929,7 +947,7 @@
       <!-- ===== 18 · DIVISOR 04 ===== -->
       <section
         class="slide slide--dark slide--chapter"
-        data-title="Capítulo 04 · O resultado"
+        data-title="Capítulo 04 · O resultado" data-fx="pentagon"
         data-chapter="O resultado"
       >
         <div class="bg-grid" aria-hidden="true"></div>
@@ -944,7 +962,7 @@
       </section>
 
       <!-- ===== 19 · ANTES E DEPOIS ===== -->
-      <section class="slide slide--light" data-title="Antes e depois" data-chapter="O resultado">
+      <section class="slide slide--light" data-title="Antes e depois" data-fx="constellation" data-fx-dim="1" data-chapter="O resultado">
         <div class="slide-inner">
           <p class="eyebrow eyebrow--center" data-r>A diferença</p>
           <h2 class="display display--center" data-r>
@@ -993,7 +1011,7 @@
       </section>
 
       <!-- ===== 20 · BENEFÍCIOS ===== -->
-      <section class="slide slide--light" data-title="Benefícios" data-chapter="O resultado">
+      <section class="slide slide--light" data-title="Benefícios" data-fx="constellation" data-fx-dim="1" data-chapter="O resultado">
         <div class="slide-inner">
           <p class="eyebrow eyebrow--center" data-r>O ecossistema completo</p>
           <h2 class="display display--center" data-r>Tudo isso acompanha <em>você.</em></h2>
@@ -1015,7 +1033,7 @@
       </section>
 
       <!-- ===== 21 · PARA QUEM É ===== -->
-      <section class="slide slide--light" data-title="Para quem é" data-chapter="O resultado">
+      <section class="slide slide--light" data-title="Para quem é" data-fx="constellation" data-fx-dim="1" data-chapter="O resultado">
         <div class="slide-inner">
           <p class="eyebrow eyebrow--center" data-r>Para quem é</p>
           <h2 class="display display--center" data-r>
@@ -1059,7 +1077,7 @@
       </section>
 
       <!-- ===== 22 · COMO FUNCIONA ===== -->
-      <section class="slide slide--light" data-title="Como funciona" data-chapter="O resultado">
+      <section class="slide slide--light" data-title="Como funciona" data-fx="constellation" data-fx-dim="1" data-chapter="O resultado">
         <div class="slide-inner">
           <p class="eyebrow eyebrow--center" data-r>Como funciona</p>
           <h2 class="display display--center" data-r>
@@ -1082,7 +1100,7 @@
       <!-- ===== 23 · CTA FINAL ===== -->
       <section
         class="slide slide--dark slide--cover"
-        data-title="Faça parte"
+        data-title="Faça parte" data-fx-x="center" data-fx="burst"
         data-chapter="O resultado"
       >
         <div class="bg-grid" aria-hidden="true"></div>
@@ -1167,11 +1185,10 @@
       <div class="progress" aria-hidden="true"><span data-progress></span></div>
     </footer>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"
-      integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc"
-      crossorigin="anonymous"
-    ></script>
+    <!-- Bibliotecas servidas do próprio repositório: a apresentação roda
+         sem internet, e nenhum CDN pode derrubá-la no meio de uma reunião. -->
+    <script src="vendor/gsap.min.js"></script>
     <script src="app.js"></script>
+    <script type="module" src="fx.js"></script>
   </body>
 </html>

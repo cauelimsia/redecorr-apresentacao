@@ -16,6 +16,7 @@
   const trackerSegs = Array.from(document.querySelectorAll(".core-tracker__seg"));
   const indexOverlay = document.querySelector("[data-index]");
   const indexList = document.querySelector("[data-index-list]");
+  const bgEl = document.getElementById("bg");
 
   const hasGsap = typeof window.gsap !== "undefined";
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -118,7 +119,10 @@
     currentEl.textContent = pad(i);
     dots.forEach((d, k) => d.classList.toggle("is-active", k === i));
     indexButtons.forEach((b, k) => b.classList.toggle("is-current", k === i));
-    document.body.classList.toggle("theme-light", slides[i].classList.contains("slide--light"));
+    const light = slides[i].classList.contains("slide--light");
+    document.body.classList.toggle("theme-light", light);
+    // a cor do slide mora na camada de fundo, atrás da cena 3D
+    if (bgEl) bgEl.style.backgroundColor = light ? "#f7f7f8" : "#0b1f33";
     chapterNameEl.textContent = slides[i].dataset.chapter || "";
     trackerSegs.forEach((seg) => {
       const at = pilarIndex[seg.dataset.seg];
@@ -129,6 +133,8 @@
     } else {
       progressEl.style.transform = `scaleX(${(i + 1) / total})`;
     }
+    // avisa a cena WebGL qual formação este slide pede (fx.js pode não existir)
+    if (window.RCFX) window.RCFX.setSlide(slides[i]);
     history.replaceState(null, "", "#" + (i + 1));
   }
 
