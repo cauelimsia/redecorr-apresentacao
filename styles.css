@@ -1946,10 +1946,15 @@ body:not(.theme-light) .dot.is-active {
 
 /* Com o painel aberto, o deck sobe para não ficar coberto */
 body.presenting .deck,
-body.presenting #fx,
 body.presenting .fx-labels {
   bottom: 15rem;
   height: auto;
+}
+
+/* O canvas precisa de altura explícita: com "auto" ele cai no tamanho
+   intrínseco dos atributos width/height e ignora o bottom. */
+body.presenting #fx {
+  height: calc(100% - 15rem);
 }
 
 body.presenting .hud--bottom,
@@ -2060,9 +2065,12 @@ body.presenting .nav-button {
   }
 
   body.presenting .deck,
-  body.presenting #fx,
   body.presenting .fx-labels {
     bottom: 18rem;
+  }
+
+  body.presenting #fx {
+    height: calc(100% - 18rem);
   }
 }
 
