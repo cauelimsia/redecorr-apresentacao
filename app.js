@@ -157,9 +157,9 @@
     if (reveals.length) {
       tl.fromTo(
         reveals,
-        { autoAlpha: 0, y: 26 },
-        { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.075, ease: "power3.out" },
-        0.15
+        { autoAlpha: 0, y: 18 },
+        { autoAlpha: 1, y: 0, duration: 0.62, stagger: 0.065, ease: "power2.out" },
+        0.14
       );
     }
 
@@ -193,7 +193,7 @@
         tl.fromTo(
           nodes,
           { scale: 0, transformOrigin: "center" },
-          { scale: 1, duration: 0.5, stagger: 0.08, ease: "back.out(2)" },
+          { scale: 1, duration: 0.45, stagger: 0.07, ease: "power2.out" },
           0.55
         );
       }
@@ -213,7 +213,7 @@
         tl.fromTo(
           dot,
           { scale: 0.4, transformOrigin: "center" },
-          { scale: 1, duration: 0.5, ease: "back.out(3)" },
+          { scale: 1, duration: 0.45, ease: "power2.out" },
           0.5
         );
       }
@@ -303,13 +303,13 @@
       },
     });
 
-    tl.to(from, { autoAlpha: 0, scale: 0.97, y: -18 * dir, duration: 0.4, ease: "power2.in" }, 0);
+    tl.to(from, { autoAlpha: 0, y: -14 * dir, duration: 0.34, ease: "power2.in" }, 0);
     to.classList.add("is-active");
     tl.fromTo(
       to,
-      { autoAlpha: 0, y: 46 * dir, scale: 1.01 },
-      { autoAlpha: 1, y: 0, scale: 1, duration: 0.55, ease: "power3.out" },
-      0.28
+      { autoAlpha: 0, y: 32 * dir },
+      { autoAlpha: 1, y: 0, duration: 0.5, ease: "power2.out" },
+      0.24
     );
     enterAnimations(to, tl);
   }
