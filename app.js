@@ -135,6 +135,7 @@
     }
     // avisa a cena WebGL qual formação este slide pede (fx.js pode não existir)
     if (window.RCFX) window.RCFX.setSlide(slides[i]);
+    renderPresenter();
     history.replaceState(null, "", "#" + (i + 1));
   }
 
@@ -159,15 +160,40 @@
   }
 
   function enterAnimations(slide, tl) {
-    const reveals = slide.querySelectorAll("[data-r]");
+    // Títulos entram por cortina (o texto é descoberto de cima para baixo),
+    // o resto sobe. Separar os dois evita que tudo pareça o mesmo movimento.
+    const heads = Array.from(slide.querySelectorAll(".display[data-r]"));
+    const reveals = Array.from(slide.querySelectorAll("[data-r]")).filter(
+      (el) => !heads.includes(el)
+    );
+
+    if (heads.length) {
+      tl.fromTo(
+        heads,
+        { clipPath: "inset(0 0 106% 0)", y: 14 },
+        {
+          clipPath: "inset(0 0 -6% 0)",
+          y: 0,
+          autoAlpha: 1,
+          duration: 1.05,
+          stagger: 0.1,
+          ease: "power3.out",
+        },
+        0.12
+      );
+    }
+
     if (reveals.length) {
       tl.fromTo(
         reveals,
         { autoAlpha: 0, y: 18 },
         { autoAlpha: 1, y: 0, duration: 0.62, stagger: 0.065, ease: "power2.out" },
-        0.14
+        0.2
       );
     }
+
+    playPipeline(slide, tl);
+    playChat(slide, tl);
 
     // Numeral gigante dos divisores de capítulo
     const chapterNum = slide.querySelector(".chapter__num");
@@ -261,11 +287,74 @@
     });
   }
 
+  /* ---------- mockups que se movem ---------- */
+
+  // O CRM é o argumento central: em vez de uma captura parada, um lead
+  // atravessa o funil de verdade enquanto o slide é apresentado.
+  function playPipeline(slide, tl) {
+    const pipe = slide.querySelector(".pipe");
+    if (!pipe) return;
+    const card = pipe.querySelector(".lcard--hot");
+    const target = pipe.querySelector(".lcard--won");
+    if (!card || !target) return;
+
+    gsap.set([card, target], { clearProps: "transform,opacity" });
+
+    // cards que ficam abaixo do que sai, para fechar o buraco na coluna
+    const below = [];
+    let sib = card.nextElementSibling;
+    while (sib) {
+      if (sib.classList.contains("lcard")) below.push(sib);
+      sib = sib.nextElementSibling;
+    }
+    gsap.set(below, { clearProps: "transform" });
+
+    tl.call(
+      () => {
+        const a = card.getBoundingClientRect();
+        const b = target.getBoundingClientRect();
+        const gap = a.height + 6.4; // altura do card + margem
+        gsap
+          .timeline()
+          .to(card, { scale: 1.04, duration: 0.25, ease: "power2.out" })
+          .to(card, {
+            x: b.left - a.left,
+            y: b.top - a.top,
+            duration: 0.85,
+            ease: "power3.inOut",
+          })
+          .to(card, { autoAlpha: 0, scale: 0.96, duration: 0.3 }, "-=0.15")
+          .to(below, { y: -gap, duration: 0.45, ease: "power2.inOut" }, "-=0.5")
+          .fromTo(
+            target,
+            { autoAlpha: 0.3, scale: 0.97 },
+            { autoAlpha: 1, scale: 1, duration: 0.45, ease: "power2.out" },
+            "-=0.4"
+          );
+      },
+      null,
+      1.9
+    );
+  }
+
+  // A Academia vende simulação de conversa: mostrar o "digitando" antes
+  // da resposta faz a tela parecer o produto, não um print.
+  function playChat(slide, tl) {
+    slide.querySelectorAll("[data-chat]").forEach((chat) => {
+      const typing = chat.querySelector(".typing");
+      if (!typing) return;
+      tl.set(typing, { autoAlpha: 0 }, 0)
+        .to(typing, { autoAlpha: 1, duration: 0.25 }, 1.0)
+        .to(typing, { autoAlpha: 0, duration: 0.2 }, 1.85);
+    });
+  }
+
   function setFinalState(slide) {
     slide.querySelectorAll("[data-r], .msg, .pent-label").forEach((el) => {
       el.style.opacity = "";
       el.style.visibility = "";
       el.style.transform = "";
+      el.style.clipPath = "";
     });
     slide.querySelectorAll("[data-count]").forEach((el) => {
       el.textContent = formatNumber(
@@ -280,6 +369,64 @@
       const dot = mini.querySelectorAll(".mp-dot")[parseInt(mini.dataset.node, 10) - 1];
       if (dot) dot.classList.add("is-on");
     }
+  }
+
+  /* ---------- Modo apresentador ---------- */
+
+  // Quem apresenta precisa de roteiro, tempo e o que vem a seguir.
+  // Fica só na tela de quem conduz: a plateia nunca vê.
+  const presenter = {
+    el: document.querySelector("[data-presenter]"),
+    open: false,
+    startedAt: null,
+    timerId: null,
+  };
+
+  function fmtClock(ms) {
+    const s = Math.floor(ms / 1000);
+    return `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
+  }
+
+  function renderPresenter() {
+    if (!presenter.el || !presenter.open) return;
+    const cur = slides[index];
+    const nxt = slides[index + 1];
+    presenter.el.querySelector("[data-p-now]").textContent = `${pad(index)} · ${
+      cur.dataset.title || ""
+    }`;
+    presenter.el.querySelector("[data-p-next]").textContent = nxt
+      ? `${pad(index + 1)} · ${nxt.dataset.title || ""}`
+      : "— fim da apresentação —";
+    presenter.el.querySelector("[data-p-notes]").textContent =
+      cur.dataset.notes || "Sem roteiro para este slide.";
+    presenter.el.querySelector("[data-p-chapter]").textContent = cur.dataset.chapter || "";
+  }
+
+  function togglePresenter() {
+    if (!presenter.el) return;
+    presenter.open = !presenter.open;
+    presenter.el.hidden = !presenter.open;
+    document.body.classList.toggle("presenting", presenter.open);
+
+    if (presenter.open) {
+      if (!presenter.startedAt) presenter.startedAt = Date.now();
+      const clock = presenter.el.querySelector("[data-p-time]");
+      presenter.timerId = setInterval(() => {
+        clock.textContent = fmtClock(Date.now() - presenter.startedAt);
+      }, 1000);
+      clock.textContent = fmtClock(Date.now() - presenter.startedAt);
+      renderPresenter();
+    } else {
+      clearInterval(presenter.timerId);
+    }
+  }
+
+  if (presenter.el) {
+    presenter.el.querySelector("[data-p-close]").addEventListener("click", togglePresenter);
+    presenter.el.querySelector("[data-p-reset]").addEventListener("click", () => {
+      presenter.startedAt = Date.now();
+      presenter.el.querySelector("[data-p-time]").textContent = "00:00";
+    });
   }
 
   /* ---------- Troca de slide ---------- */
@@ -332,6 +479,11 @@
     if (e.key === "Escape") {
       e.preventDefault();
       toggleIndex();
+      return;
+    }
+    if (e.key === "p" || e.key === "P") {
+      e.preventDefault();
+      togglePresenter();
       return;
     }
     if (!indexOverlay.hidden) return;
