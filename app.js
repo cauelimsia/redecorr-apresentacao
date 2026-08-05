@@ -1,5 +1,7 @@
-/* RedeCORR · Apresentação CORE5®
-   Navegação de deck + animações GSAP (fallback sem animação se o CDN falhar). */
+/* RedeCORR · Apresentação institucional CORE5®
+   Navegação de deck, índice navegável e animações GSAP.
+   Sem GSAP (CDN fora do ar) ou com prefers-reduced-motion, o deck
+   continua navegável: os slides aparecem no estado final. */
 
 (function () {
   "use strict";
@@ -10,13 +12,16 @@
   const currentEl = document.querySelector("[data-current]");
   const totalEl = document.querySelector("[data-total]");
   const progressEl = document.querySelector("[data-progress]");
+  const chapterNameEl = document.querySelector("[data-chapter-name]");
   const trackerSegs = Array.from(document.querySelectorAll(".core-tracker__seg"));
+  const indexOverlay = document.querySelector("[data-index]");
+  const indexList = document.querySelector("[data-index-list]");
 
   const hasGsap = typeof window.gsap !== "undefined";
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const animate = hasGsap && !reduced;
 
-  // Índice do slide de cada pilar (para o tracker CORE5)
+  // Slide de cada pilar, para acender o tracker CORE5 no HUD
   const pilarIndex = {};
   slides.forEach((s, i) => {
     if (s.dataset.pilar) pilarIndex[s.dataset.pilar] = i;
@@ -27,7 +32,66 @@
 
   totalEl.textContent = String(total).padStart(2, "0");
 
-  // Dots
+  /* ---------- Índice ---------- */
+
+  const indexButtons = [];
+  let lastChapter = null;
+
+  slides.forEach((s, i) => {
+    const chapter = s.dataset.chapter || "Apresentação";
+    if (chapter !== lastChapter) {
+      const h = document.createElement("p");
+      h.className = "index-chapter";
+      h.textContent = chapter;
+      indexList.appendChild(h);
+      lastChapter = chapter;
+    }
+    const b = document.createElement("button");
+    b.className = "index-item";
+    b.type = "button";
+    const num = document.createElement("span");
+    num.className = "index-item__num";
+    num.textContent = String(i + 1).padStart(2, "0");
+    b.appendChild(num);
+    b.appendChild(document.createTextNode(s.dataset.title || `Slide ${i + 1}`));
+    b.addEventListener("click", () => {
+      closeIndex();
+      go(i);
+    });
+    indexList.appendChild(b);
+    indexButtons.push(b);
+  });
+
+  function openIndex() {
+    indexOverlay.hidden = false;
+    indexButtons.forEach((b, k) => b.classList.toggle("is-current", k === index));
+    const cur = indexButtons[index];
+    if (cur) cur.scrollIntoView({ block: "center" });
+    if (animate) {
+      gsap.fromTo(
+        indexOverlay.querySelector(".index-panel"),
+        { autoAlpha: 0, y: 24, scale: 0.98 },
+        { autoAlpha: 1, y: 0, scale: 1, duration: 0.35, ease: "power3.out" }
+      );
+    }
+  }
+
+  function closeIndex() {
+    indexOverlay.hidden = true;
+  }
+
+  function toggleIndex() {
+    indexOverlay.hidden ? openIndex() : closeIndex();
+  }
+
+  document.querySelector("[data-menu]").addEventListener("click", toggleIndex);
+  document.querySelector("[data-index-close]").addEventListener("click", closeIndex);
+  indexOverlay.addEventListener("click", (e) => {
+    if (e.target === indexOverlay) closeIndex();
+  });
+
+  /* ---------- Dots ---------- */
+
   slides.forEach((s, i) => {
     const b = document.createElement("button");
     b.className = "dot";
@@ -38,6 +102,14 @@
   });
   const dots = Array.from(dotsWrap.children);
 
+  /* ---------- Atalhos da agenda ---------- */
+
+  document.querySelectorAll("[data-goto]").forEach((el) => {
+    el.addEventListener("click", () => go(parseInt(el.dataset.goto, 10) - 1));
+  });
+
+  /* ---------- HUD ---------- */
+
   function pad(n) {
     return String(n + 1).padStart(2, "0");
   }
@@ -45,7 +117,9 @@
   function updateHud(i) {
     currentEl.textContent = pad(i);
     dots.forEach((d, k) => d.classList.toggle("is-active", k === i));
+    indexButtons.forEach((b, k) => b.classList.toggle("is-current", k === i));
     document.body.classList.toggle("theme-light", slides[i].classList.contains("slide--light"));
+    chapterNameEl.textContent = slides[i].dataset.chapter || "";
     trackerSegs.forEach((seg) => {
       const at = pilarIndex[seg.dataset.seg];
       seg.classList.toggle("is-on", at !== undefined && at <= i);
@@ -58,7 +132,14 @@
     history.replaceState(null, "", "#" + (i + 1));
   }
 
-  /* ---------- Animações de entrada por slide ---------- */
+  /* ---------- Animações de entrada ---------- */
+
+  function formatNumber(v, decimals) {
+    return v.toLocaleString("pt-BR", {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+    });
+  }
 
   function prepLines(svg) {
     svg.querySelectorAll(".net-lines line").forEach((ln) => {
@@ -77,18 +158,29 @@
       tl.fromTo(
         reveals,
         { autoAlpha: 0, y: 26 },
-        { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.09, ease: "power3.out" },
+        { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.075, ease: "power3.out" },
         0.15
       );
     }
 
-    // Riscado "Isso não é uma assessoria."
+    // Numeral gigante dos divisores de capítulo
+    const chapterNum = slide.querySelector(".chapter__num");
+    if (chapterNum) {
+      tl.fromTo(
+        chapterNum,
+        { scale: 1.25, autoAlpha: 0 },
+        { scale: 1, autoAlpha: 1, duration: 1, ease: "power3.out" },
+        0.1
+      );
+    }
+
+    // Riscado do slide de posicionamento
     const strike = slide.querySelector(".strike");
     if (strike) {
       tl.call(() => strike.classList.add("is-struck"), null, 0.9);
     }
 
-    // Pentágono / rede: desenha linhas e pulsa nós
+    // Pentágono grande e rede da capa: desenha linhas, depois nós
     slide.querySelectorAll(".core-pent, .cover-net").forEach((svg) => {
       prepLines(svg);
       tl.to(
@@ -111,9 +203,26 @@
       }
     });
 
-    // Contadores
+    // Mini pentágono dos pilares: acende o nó do pilar atual
+    const mini = slide.querySelector(".mini-pent");
+    if (mini) {
+      const n = parseInt(mini.dataset.node, 10);
+      const dot = mini.querySelectorAll(".mp-dot")[n - 1];
+      if (dot) {
+        tl.call(() => dot.classList.add("is-on"), null, 0.5);
+        tl.fromTo(
+          dot,
+          { scale: 0.4, transformOrigin: "center" },
+          { scale: 1, duration: 0.5, ease: "back.out(3)" },
+          0.5
+        );
+      }
+    }
+
+    // Contadores (inteiros e decimais)
     slide.querySelectorAll("[data-count]").forEach((el) => {
-      const target = parseInt(el.dataset.count, 10);
+      const target = parseFloat(el.dataset.count);
+      const decimals = parseInt(el.dataset.decimals || "0", 10);
       const obj = { v: 0 };
       tl.to(
         obj,
@@ -122,7 +231,7 @@
           duration: 1.3,
           ease: "power2.out",
           onUpdate: () => {
-            el.textContent = Math.round(obj.v).toLocaleString("pt-BR");
+            el.textContent = formatNumber(obj.v, decimals);
           },
         },
         0.55
@@ -132,19 +241,13 @@
     // Barras do dashboard
     const bars = slide.querySelectorAll("[data-bar]");
     if (bars.length) {
-      tl.fromTo(
-        bars,
-        { scaleY: 0 },
-        { scaleY: 1, duration: 0.7, stagger: 0.09, ease: "power3.out" },
-        0.6
-      );
+      tl.fromTo(bars, { scaleY: 0 }, { scaleY: 1, duration: 0.7, stagger: 0.09, ease: "power3.out" }, 0.6);
     }
 
-    // Chat: mensagens em sequência
+    // Chat: mensagens em sequência, como numa conversa real
     slide.querySelectorAll("[data-chat]").forEach((chat) => {
-      const msgs = chat.querySelectorAll(".msg");
       tl.fromTo(
-        msgs,
+        chat.querySelectorAll(".msg"),
         { autoAlpha: 0, y: 14 },
         { autoAlpha: 1, y: 0, duration: 0.55, stagger: 0.55, ease: "power2.out" },
         0.6
@@ -153,17 +256,24 @@
   }
 
   function setFinalState(slide) {
-    // Sem animação: garante tudo visível e valores finais
     slide.querySelectorAll("[data-r], .msg, .pent-label").forEach((el) => {
       el.style.opacity = "";
       el.style.visibility = "";
       el.style.transform = "";
     });
     slide.querySelectorAll("[data-count]").forEach((el) => {
-      el.textContent = parseInt(el.dataset.count, 10).toLocaleString("pt-BR");
+      el.textContent = formatNumber(
+        parseFloat(el.dataset.count),
+        parseInt(el.dataset.decimals || "0", 10)
+      );
     });
     const strike = slide.querySelector(".strike");
     if (strike) strike.classList.add("is-struck");
+    const mini = slide.querySelector(".mini-pent");
+    if (mini) {
+      const dot = mini.querySelectorAll(".mp-dot")[parseInt(mini.dataset.node, 10) - 1];
+      if (dot) dot.classList.add("is-on");
+    }
   }
 
   /* ---------- Troca de slide ---------- */
@@ -213,6 +323,13 @@
   document.querySelector("[data-prev]").addEventListener("click", prev);
 
   window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      e.preventDefault();
+      toggleIndex();
+      return;
+    }
+    if (!indexOverlay.hidden) return;
+
     if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") {
       e.preventDefault();
       next();
@@ -230,6 +347,7 @@
   window.addEventListener(
     "wheel",
     (e) => {
+      if (!indexOverlay.hidden) return;
       const now = Date.now();
       if (now - wheelLock < 1100 || Math.abs(e.deltaY) < 24) return;
       wheelLock = now;
@@ -243,7 +361,7 @@
   window.addEventListener(
     "touchend",
     (e) => {
-      if (touchX === null) return;
+      if (touchX === null || !indexOverlay.hidden) return;
       const dx = e.changedTouches[0].clientX - touchX;
       touchX = null;
       if (Math.abs(dx) < 48) return;

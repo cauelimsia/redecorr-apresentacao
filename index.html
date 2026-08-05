@@ -10,9 +10,10 @@
     <meta property="og:title" content="RedeCORR — O futuro da corretagem de planos de saúde" />
     <meta
       property="og:description"
-      content="Você vende. O CORE5® cuida do resto. Apresentação do ecossistema RedeCORR."
+      content="Você vende. O CORE5® cuida do resto. Apresentação institucional do ecossistema RedeCORR."
     />
     <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#0f2740" />
     <title>RedeCORR — O futuro da corretagem começa aqui</title>
     <link
       rel="icon"
@@ -27,24 +28,35 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <!-- HUD -->
+    <!-- ============ HUD ============ -->
     <header class="hud hud--top">
       <div class="brand">
-        <img src="assets/logo-redecorr-branca.png" alt="redeCORR — inovação para profissionais de seguros" />
+        <img
+          src="assets/logo-redecorr-branca.png"
+          alt="redeCORR — inovação para profissionais de seguros"
+        />
       </div>
-      <div class="core-tracker" aria-label="Progresso nos pilares CORE5">
-        <span class="core-tracker__label">CORE5<sup>®</sup></span>
-        <span class="core-tracker__seg" data-seg="1">1</span>
-        <span class="core-tracker__seg" data-seg="2">2</span>
-        <span class="core-tracker__seg" data-seg="3">3</span>
-        <span class="core-tracker__seg" data-seg="4">4</span>
-        <span class="core-tracker__seg" data-seg="5">5</span>
+      <div class="hud-right">
+        <span class="chapter-name" data-chapter-name>Abertura</span>
+        <div class="core-tracker" aria-label="Progresso nos pilares CORE5">
+          <span class="core-tracker__label">CORE5<sup>®</sup></span>
+          <span class="core-tracker__seg" data-seg="1">1</span>
+          <span class="core-tracker__seg" data-seg="2">2</span>
+          <span class="core-tracker__seg" data-seg="3">3</span>
+          <span class="core-tracker__seg" data-seg="4">4</span>
+          <span class="core-tracker__seg" data-seg="5">5</span>
+        </div>
+        <button class="menu-btn" type="button" data-menu aria-label="Abrir índice da apresentação">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 6h16" /><path d="M4 12h16" /><path d="M4 18h16" />
+          </svg>
+        </button>
       </div>
     </header>
 
     <main id="deck" class="deck" aria-live="polite">
-      <!-- 01 · CAPA -->
-      <section class="slide slide--dark slide--cover" data-title="Capa">
+      <!-- ===== 1 · CAPA ===== -->
+      <section class="slide slide--dark slide--cover" data-title="Capa" data-chapter="Abertura">
         <div class="bg-grid" aria-hidden="true"></div>
         <div class="bg-glow bg-glow--blue" aria-hidden="true"></div>
         <svg class="cover-net" viewBox="0 0 600 600" aria-hidden="true">
@@ -76,12 +88,103 @@
           <p class="cover-sub" data-r>
             Você vende. <span class="accent">O CORE5<sup>®</sup> cuida do resto.</span>
           </p>
-          <p class="hint" data-r>Use ← → para navegar</p>
+          <div class="cover-meta" data-r>
+            <span>Apresentação institucional</span>
+            <span class="cover-meta__dot" aria-hidden="true"></span>
+            <span>redecorr.com</span>
+          </div>
+          <p class="hint" data-r>← → navegar &nbsp;·&nbsp; Esc índice</p>
         </div>
       </section>
 
-      <!-- 02 · O PROBLEMA -->
-      <section class="slide slide--light" data-title="O ponto de partida">
+      <!-- ===== 2 · AGENDA ===== -->
+      <section class="slide slide--light" data-title="Agenda" data-chapter="Abertura">
+        <div class="slide-inner">
+          <p class="eyebrow" data-r>Agenda</p>
+          <h2 class="display" data-r>O que você vai ver <em>nos próximos minutos.</em></h2>
+          <ol class="agenda">
+            <li class="agenda__item" data-r data-goto="3">
+              <span class="agenda__num">01</span>
+              <span class="agenda__body">
+                <b>O cenário</b>
+                <span>O mercado que cresce e o corretor que trabalha sozinho</span>
+              </span>
+            </li>
+            <li class="agenda__item" data-r data-goto="8">
+              <span class="agenda__num">02</span>
+              <span class="agenda__body">
+                <b>A metodologia CORE5<sup>®</sup></b>
+                <span>Os cinco pilares da alta performance do corretor</span>
+              </span>
+            </li>
+            <li class="agenda__item" data-r data-goto="15">
+              <span class="agenda__num">03</span>
+              <span class="agenda__body">
+                <b>As plataformas</b>
+                <span>CRM especializado e Academia de Vendas com IA</span>
+              </span>
+            </li>
+            <li class="agenda__item" data-r data-goto="19">
+              <span class="agenda__num">04</span>
+              <span class="agenda__body">
+                <b>O resultado</b>
+                <span>O que muda na sua operação e como fazer parte</span>
+              </span>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ===== 3 · DIVISOR 01 ===== -->
+      <section
+        class="slide slide--dark slide--chapter"
+        data-title="Capítulo 01 · O cenário"
+        data-chapter="O cenário"
+      >
+        <div class="bg-grid" aria-hidden="true"></div>
+        <div class="bg-glow bg-glow--blue" aria-hidden="true"></div>
+        <div class="slide-inner chapter">
+          <span class="chapter__num" data-r>01</span>
+          <div class="chapter__text">
+            <h2 class="display display--big" data-r>O cenário</h2>
+            <p class="lead" data-r>
+              Um mercado em expansão, uma profissão que ainda opera como há vinte anos.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 4 · MERCADO ===== -->
+      <section class="slide slide--light" data-title="O mercado" data-chapter="O cenário">
+        <div class="slide-inner">
+          <p class="eyebrow" data-r>O mercado</p>
+          <h2 class="display" data-r>Nunca houve tanta gente <em>para atender.</em></h2>
+          <div class="metric-row">
+            <div class="metric" data-r>
+              <span class="metric__num"><span data-count="53.1" data-decimals="1">0</span> mi</span>
+              <span class="metric__label">beneficiários de planos médico-hospitalares no Brasil</span>
+            </div>
+            <div class="metric" data-r>
+              <span class="metric__num"><span data-count="36.2" data-decimals="1">0</span> mi</span>
+              <span class="metric__label">beneficiários de planos exclusivamente odontológicos</span>
+            </div>
+            <div class="metric" data-r>
+              <span class="metric__num">+<span data-count="1.3" data-decimals="1">0</span> mi</span>
+              <span class="metric__label">novos beneficiários em odonto nos últimos doze meses</span>
+            </div>
+          </div>
+          <p class="source" data-r>
+            Fonte: ANS — Sala de Situação, competência maio/2026.
+          </p>
+          <p class="lead" data-r>
+            A demanda existe e continua crescendo. O que separa um corretor do outro não é mais o
+            acesso ao produto: é a estrutura que ele tem por trás para captar, atender e reter.
+          </p>
+        </div>
+      </section>
+
+      <!-- ===== 5 · O CORRETOR SOZINHO ===== -->
+      <section class="slide slide--light" data-title="O corretor sozinho" data-chapter="O cenário">
         <div class="slide-inner slide-inner--split">
           <div class="col-text">
             <p class="eyebrow" data-r>O ponto de partida</p>
@@ -90,31 +193,57 @@
               Prospectar, cotar, negociar, postar, organizar carteira, treinar, acompanhar cliente.
               Vender é só uma parte do dia. O resto consome o crescimento.
             </p>
+            <p class="lead" data-r>
+              Não é falta de esforço. É falta de estrutura: cada tarefa dessas exige uma ferramenta,
+              um processo e um tempo que ninguém tem sobrando.
+            </p>
           </div>
           <div class="col-visual">
             <div class="burden-stack">
               <div class="burden" data-r>
-                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"
+                  />
+                </svg>
                 Prospecção por conta própria
               </div>
               <div class="burden" data-r>
-                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" /><path
+                    d="M9 21V9"
+                  />
+                </svg>
                 Cotações manuais em planilha
               </div>
               <div class="burden" data-r>
-                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M3 11l18-5v12L3 14v-3z" /><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" />
+                </svg>
                 Marketing improvisado
               </div>
               <div class="burden" data-r>
-                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"
+                  />
+                </svg>
                 Carteira sem organização
               </div>
               <div class="burden" data-r>
-                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10v6"/><path d="M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M22 10v6" /><path d="M2 10l10-5 10 5-10 5z" /><path
+                    d="M6 12v5c3 3 9 3 12 0v-5"
+                  />
+                </svg>
                 Nenhum treinamento contínuo
               </div>
               <div class="burden burden--result" data-r>
-                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                  <polyline points="22 17 13.5 8.5 8.5 13.5 2 7" /><polyline
+                    points="16 17 22 17 22 11"
+                  />
+                </svg>
                 = crescimento travado
               </div>
             </div>
@@ -122,8 +251,8 @@
         </div>
       </section>
 
-      <!-- 03 · POSICIONAMENTO -->
-      <section class="slide slide--dark" data-title="Posicionamento">
+      <!-- ===== 6 · POSICIONAMENTO ===== -->
+      <section class="slide slide--dark" data-title="Posicionamento" data-chapter="O cenário">
         <div class="bg-grid" aria-hidden="true"></div>
         <div class="slide-inner slide-inner--center">
           <h2 class="display display--big">
@@ -131,23 +260,115 @@
             <span class="accent" data-r>É um ecossistema de crescimento.</span>
           </h2>
           <p class="lead lead--center" data-r>
-            Tecnologia, inteligência artificial, marketing, capacitação e oportunidades comerciais,
-            reunidos em uma única estrutura criada exclusivamente para o corretor de planos de saúde.
+            Assessoria resolve uma parte. Ecossistema sustenta a operação inteira: tecnologia,
+            inteligência artificial, marketing, capacitação e oportunidades comerciais reunidos em
+            uma única estrutura criada exclusivamente para o corretor de planos de saúde.
           </p>
         </div>
       </section>
 
-      <!-- 04 · CORE5 -->
-      <section class="slide slide--dark slide--core" data-title="CORE5®">
+      <!-- ===== 7 · QUEM SOMOS ===== -->
+      <section class="slide slide--light" data-title="Quem somos" data-chapter="O cenário">
+        <div class="slide-inner slide-inner--split">
+          <div class="col-text">
+            <p class="eyebrow" data-r>Quem somos</p>
+            <h2 class="display" data-r>
+              A RedeCORR nasceu para mudar <em>a forma como o corretor cresce.</em>
+            </h2>
+            <p class="lead" data-r>
+              Nascemos de dentro do mercado, não de fora dele. Cada ferramenta da RedeCORR existe
+              porque um corretor precisou dela primeiro.
+            </p>
+            <p class="lead" data-r>
+              Em vez de vender cursos avulsos ou sistemas genéricos, montamos a estrutura completa
+              que um profissional precisa para operar como empresa: ferramenta, método, marca e
+              oportunidade no mesmo lugar.
+            </p>
+          </div>
+          <div class="col-visual">
+            <div class="pillars-preview">
+              <div class="pillar-chip" data-r>
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8" /><path
+                    d="M12 17v4"
+                  />
+                </svg>
+                <b>Tecnologia</b>
+                <span>CRM e cotador próprios</span>
+              </div>
+              <div class="pillar-chip" data-r>
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M22 10v6" /><path d="M2 10l10-5 10 5-10 5z" /><path
+                    d="M6 12v5c3 3 9 3 12 0v-5"
+                  />
+                </svg>
+                <b>Capacitação</b>
+                <span>Academia com IA</span>
+              </div>
+              <div class="pillar-chip" data-r>
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M3 11l18-5v12L3 14v-3z" /><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" />
+                </svg>
+                <b>Marketing</b>
+                <span>Marca e captação</span>
+              </div>
+              <div class="pillar-chip" data-r>
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2v20" /><path
+                    d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
+                  />
+                </svg>
+                <b>Oportunidades</b>
+                <span>Leads e campanhas</span>
+              </div>
+              <div class="pillar-chip" data-r>
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M3 3v18h18" /><path d="m19 9-5 5-4-4-3 3" />
+                </svg>
+                <b>Performance</b>
+                <span>Indicadores e evolução</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 8 · DIVISOR 02 ===== -->
+      <section
+        class="slide slide--dark slide--chapter"
+        data-title="Capítulo 02 · A metodologia"
+        data-chapter="A metodologia"
+      >
+        <div class="bg-grid" aria-hidden="true"></div>
+        <div class="bg-glow bg-glow--blue" aria-hidden="true"></div>
+        <div class="slide-inner chapter">
+          <span class="chapter__num" data-r>02</span>
+          <div class="chapter__text">
+            <h2 class="display display--big" data-r>A metodologia CORE5<sup>®</sup></h2>
+            <p class="lead" data-r>
+              Cinco pilares que, juntos, sustentam a operação inteira do corretor.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 9 · CORE5 ===== -->
+      <section
+        class="slide slide--dark slide--core"
+        data-title="CORE5® · visão geral"
+        data-chapter="A metodologia"
+      >
         <div class="bg-glow bg-glow--center" aria-hidden="true"></div>
         <div class="slide-inner slide-inner--split">
           <div class="col-text">
             <p class="eyebrow" data-r>Metodologia proprietária</p>
             <h2 class="display display--big" data-r>CORE5<sup>®</sup></h2>
             <p class="lead" data-r>
-              Os cinco pilares da alta performance do corretor. Todos os serviços da RedeCORR
-              nascem deles. Você vai conhecer um por um.
+              Os cinco pilares da alta performance do corretor. Todos os serviços da RedeCORR nascem
+              deles, e nenhum funciona isolado: tecnologia sem capacitação vira sistema parado,
+              marketing sem oportunidade vira custo.
             </p>
+            <p class="lead" data-r>Você vai conhecer um por um.</p>
           </div>
           <div class="col-visual">
             <svg class="core-pent" viewBox="0 0 600 600" aria-label="Os cinco pilares do CORE5">
@@ -184,20 +405,39 @@
                 <text y="6">5</text>
               </g>
               <g class="pent-label" transform="translate(300 30)"><text>Tecnologia</text></g>
-              <g class="pent-label" transform="translate(548 241)"><text style="text-anchor:start">Capacitação</text></g>
+              <g class="pent-label" transform="translate(548 241)">
+                <text style="text-anchor: start">Capacitação</text>
+              </g>
               <g class="pent-label" transform="translate(440 540)"><text>Marketing</text></g>
               <g class="pent-label" transform="translate(160 540)"><text>Oportunidades</text></g>
-              <g class="pent-label" transform="translate(52 241)"><text style="text-anchor:end">Performance</text></g>
+              <g class="pent-label" transform="translate(52 241)">
+                <text style="text-anchor: end">Performance</text>
+              </g>
             </svg>
           </div>
         </div>
       </section>
 
-      <!-- 05 · PILAR 1 TECNOLOGIA -->
-      <section class="slide slide--light" data-title="Pilar 1 · Tecnologia" data-pilar="1">
+      <!-- ===== 10 · PILAR 1 ===== -->
+      <section
+        class="slide slide--light"
+        data-title="Pilar 1 · Tecnologia"
+        data-chapter="A metodologia"
+        data-pilar="1"
+      >
         <div class="slide-inner slide-inner--split">
           <div class="col-text">
-            <p class="eyebrow eyebrow--pilar" data-r>Pilar 01 / 05 · Tecnologia</p>
+            <div class="pilar-head" data-r>
+              <svg class="mini-pent" viewBox="0 0 120 120" data-node="1" aria-hidden="true">
+                <path class="mini-pent__shape" d="M60 16 101.85 46.4 85.86 95.6 34.14 95.6 18.15 46.4Z" />
+                <circle class="mp-dot" cx="60" cy="16" r="6" />
+                <circle class="mp-dot" cx="101.85" cy="46.4" r="6" />
+                <circle class="mp-dot" cx="85.86" cy="95.6" r="6" />
+                <circle class="mp-dot" cx="34.14" cy="95.6" r="6" />
+                <circle class="mp-dot" cx="18.15" cy="46.4" r="6" />
+              </svg>
+              <span class="pilar-head__label">Pilar 1 de 5 · Tecnologia</span>
+            </div>
             <h2 class="display" data-r>Sua operação inteira dentro de <em>um CRM.</em></h2>
             <ul class="chip-list" data-r>
               <li>CRM especializado</li>
@@ -213,21 +453,64 @@
           </div>
           <div class="col-visual">
             <div class="app-window float-soft" data-r>
-              <div class="app-window__bar"><i></i><i></i><i></i><span>CRM RedeCORR</span></div>
-              <div class="kanban">
-                <div class="kanban__col">
-                  <h4>Novo lead <b>12</b></h4>
-                  <div class="kcard">Maria S. · PME 8 vidas</div>
-                  <div class="kcard">João P. · Individual</div>
+              <div class="app-window__bar">
+                <i></i><i></i><i></i><span>CRM redeCORR · Gestão de leads</span>
+              </div>
+              <div class="pipe">
+                <div class="pipe__col">
+                  <div class="pipe__head">
+                    <span class="pipe__dot pipe__dot--new"></span>Novos leads
+                    <b>12</b>
+                  </div>
+                  <div class="pipe__pot">R$ 3.344 potencial</div>
+                  <div class="lcard">
+                    <div class="lcard__top"><span class="av">MA</span> Marina A.</div>
+                    <div class="lcard__tags">
+                      <span class="tg">SDR</span><span class="tg tg--morno">Morno</span>
+                    </div>
+                  </div>
+                  <div class="lcard">
+                    <div class="lcard__top"><span class="av">CE</span> Carlos E.</div>
+                    <div class="lcard__tags">
+                      <span class="tg">SDR</span><span class="tg tg--frio">Frio</span>
+                    </div>
+                  </div>
                 </div>
-                <div class="kanban__col">
-                  <h4>Cotação <b>7</b></h4>
-                  <div class="kcard kcard--hot">Clínica Vida · 23 vidas</div>
-                  <div class="kcard">Ana L. · Familiar</div>
+                <div class="pipe__col">
+                  <div class="pipe__head">
+                    <span class="pipe__dot pipe__dot--qual"></span>Qualificação
+                    <b>38</b>
+                  </div>
+                  <div class="pipe__pot">R$ 30.512 potencial</div>
+                  <div class="lcard lcard--hot">
+                    <div class="lcard__top"><span class="av">CV</span> Clínica Vida</div>
+                    <div class="lcard__tags">
+                      <span class="tg">Corretor</span><span class="tg tg--quente">Quente</span>
+                    </div>
+                    <div class="lcard__foot"><span class="mod">PME</span> R$ 1.876</div>
+                  </div>
+                  <div class="lcard">
+                    <div class="lcard__top"><span class="av">RS</span> Renata S.</div>
+                    <div class="lcard__tags">
+                      <span class="tg">SDR</span><span class="tg tg--morno">Morno</span>
+                    </div>
+                  </div>
                 </div>
-                <div class="kanban__col">
-                  <h4>Fechado <b>5</b></h4>
-                  <div class="kcard kcard--won">Grupo Norte · R$ 9.4k/mês</div>
+                <div class="pipe__col">
+                  <div class="pipe__head">
+                    <span class="pipe__dot pipe__dot--won"></span>Ganho / fechado
+                    <b>38</b>
+                  </div>
+                  <div class="pipe__pot">R$ 25.749 fechado</div>
+                  <div class="lcard lcard--won">
+                    <div class="lcard__top"><span class="av">GN</span> Grupo Norte</div>
+                    <div class="lcard__tags">
+                      <span class="tg">Corretor</span><span class="tg tg--quente">Quente</span>
+                    </div>
+                    <div class="lcard__foot">
+                      <span class="mod">Coletivo por adesão</span> R$ 9.412
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -235,11 +518,26 @@
         </div>
       </section>
 
-      <!-- 06 · PILAR 2 CAPACITAÇÃO -->
-      <section class="slide slide--light" data-title="Pilar 2 · Capacitação" data-pilar="2">
+      <!-- ===== 11 · PILAR 2 ===== -->
+      <section
+        class="slide slide--light"
+        data-title="Pilar 2 · Capacitação"
+        data-chapter="A metodologia"
+        data-pilar="2"
+      >
         <div class="slide-inner slide-inner--split">
           <div class="col-text">
-            <p class="eyebrow eyebrow--pilar" data-r>Pilar 02 / 05 · Capacitação</p>
+            <div class="pilar-head" data-r>
+              <svg class="mini-pent" viewBox="0 0 120 120" data-node="2" aria-hidden="true">
+                <path class="mini-pent__shape" d="M60 16 101.85 46.4 85.86 95.6 34.14 95.6 18.15 46.4Z" />
+                <circle class="mp-dot" cx="60" cy="16" r="6" />
+                <circle class="mp-dot" cx="101.85" cy="46.4" r="6" />
+                <circle class="mp-dot" cx="85.86" cy="95.6" r="6" />
+                <circle class="mp-dot" cx="34.14" cy="95.6" r="6" />
+                <circle class="mp-dot" cx="18.15" cy="46.4" r="6" />
+              </svg>
+              <span class="pilar-head__label">Pilar 2 de 5 · Capacitação</span>
+            </div>
             <h2 class="display" data-r>Academia de Vendas <em>com IA.</em></h2>
             <p class="lead" data-r>
               Clientes simulados, objeções reais, correção automática e feedback por IA: o corretor
@@ -252,10 +550,16 @@
           </div>
           <div class="col-visual">
             <div class="chat-window" data-r>
-              <div class="app-window__bar"><i></i><i></i><i></i><span>Academia · Simulação</span></div>
+              <div class="app-window__bar">
+                <i></i><i></i><i></i><span>Academia · Simulação</span>
+              </div>
               <div class="chat" data-chat>
-                <div class="msg msg--persona">Achei caro. A concorrente me ofereceu bem mais barato…</div>
-                <div class="msg msg--broker">Entendo. Posso te mostrar o que está incluso e comparar cobertura por cobertura?</div>
+                <div class="msg msg--persona">
+                  Achei caro. A concorrente me ofereceu bem mais barato…
+                </div>
+                <div class="msg msg--broker">
+                  Entendo. Posso te mostrar o que está incluso e comparar cobertura por cobertura?
+                </div>
                 <div class="msg msg--ia">
                   <span class="msg--ia__tag">Feedback da IA</span>
                   Boa condução: você validou a objeção antes de responder.
@@ -267,11 +571,26 @@
         </div>
       </section>
 
-      <!-- 07 · PILAR 3 MARKETING -->
-      <section class="slide slide--light" data-title="Pilar 3 · Marketing" data-pilar="3">
+      <!-- ===== 12 · PILAR 3 ===== -->
+      <section
+        class="slide slide--light"
+        data-title="Pilar 3 · Marketing"
+        data-chapter="A metodologia"
+        data-pilar="3"
+      >
         <div class="slide-inner slide-inner--split">
           <div class="col-text">
-            <p class="eyebrow eyebrow--pilar" data-r>Pilar 03 / 05 · Marketing</p>
+            <div class="pilar-head" data-r>
+              <svg class="mini-pent" viewBox="0 0 120 120" data-node="3" aria-hidden="true">
+                <path class="mini-pent__shape" d="M60 16 101.85 46.4 85.86 95.6 34.14 95.6 18.15 46.4Z" />
+                <circle class="mp-dot" cx="60" cy="16" r="6" />
+                <circle class="mp-dot" cx="101.85" cy="46.4" r="6" />
+                <circle class="mp-dot" cx="85.86" cy="95.6" r="6" />
+                <circle class="mp-dot" cx="34.14" cy="95.6" r="6" />
+                <circle class="mp-dot" cx="18.15" cy="46.4" r="6" />
+              </svg>
+              <span class="pilar-head__label">Pilar 3 de 5 · Marketing</span>
+            </div>
             <h2 class="display" data-r>Autoridade que <em>gera cliente.</em></h2>
             <ul class="chip-list" data-r>
               <li>Landing pages</li>
@@ -281,21 +600,29 @@
               <li>Redes sociais</li>
             </ul>
             <p class="lead" data-r>
-              Presença digital pronta e profissional: o corretor aparece como marca, não como
-              contato avulso no WhatsApp.
+              Presença digital pronta e profissional: o corretor aparece como marca, não como contato
+              avulso no WhatsApp.
             </p>
           </div>
           <div class="col-visual">
             <div class="mk-stack">
               <div class="app-window mk-lp float-soft" data-r>
-                <div class="app-window__bar"><i></i><i></i><i></i><span>seusite.corretor.com</span></div>
+                <div class="app-window__bar">
+                  <i></i><i></i><i></i><span>seusite.corretor.com</span>
+                </div>
                 <div class="mk-lp__hero">
                   <b>Plano de saúde sem dor de cabeça</b>
                   <span class="mk-btn">Falar com especialista</span>
                 </div>
               </div>
               <div class="mk-social float-soft" data-r>
-                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg>
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="2" y="2" width="20" height="20" rx="5" /><circle
+                    cx="12"
+                    cy="12"
+                    r="4"
+                  /><line x1="17.5" y1="6.5" x2="17.5" y2="6.5" />
+                </svg>
                 novo criativo publicado
               </div>
             </div>
@@ -303,11 +630,26 @@
         </div>
       </section>
 
-      <!-- 08 · PILAR 4 OPORTUNIDADES -->
-      <section class="slide slide--light" data-title="Pilar 4 · Oportunidades" data-pilar="4">
+      <!-- ===== 13 · PILAR 4 ===== -->
+      <section
+        class="slide slide--light"
+        data-title="Pilar 4 · Oportunidades"
+        data-chapter="A metodologia"
+        data-pilar="4"
+      >
         <div class="slide-inner slide-inner--split">
           <div class="col-text">
-            <p class="eyebrow eyebrow--pilar" data-r>Pilar 04 / 05 · Oportunidades</p>
+            <div class="pilar-head" data-r>
+              <svg class="mini-pent" viewBox="0 0 120 120" data-node="4" aria-hidden="true">
+                <path class="mini-pent__shape" d="M60 16 101.85 46.4 85.86 95.6 34.14 95.6 18.15 46.4Z" />
+                <circle class="mp-dot" cx="60" cy="16" r="6" />
+                <circle class="mp-dot" cx="101.85" cy="46.4" r="6" />
+                <circle class="mp-dot" cx="85.86" cy="95.6" r="6" />
+                <circle class="mp-dot" cx="34.14" cy="95.6" r="6" />
+                <circle class="mp-dot" cx="18.15" cy="46.4" r="6" />
+              </svg>
+              <span class="pilar-head__label">Pilar 4 de 5 · Oportunidades</span>
+            </div>
             <h2 class="display" data-r>Negócio novo <em>chegando até você.</em></h2>
             <ul class="chip-list" data-r>
               <li>Leads</li>
@@ -320,20 +662,44 @@
           </div>
           <div class="col-visual">
             <div class="opp-stack">
-              <div class="opp" data-r><span class="opp__tag opp__tag--new">Lead</span> PME · 12 vidas · pronto para cotação</div>
-              <div class="opp" data-r><span class="opp__tag">Campanha</span> Incentivo Q3 · bônus por produção</div>
-              <div class="opp" data-r><span class="opp__tag">Parceria</span> Projeto exclusivo com operadora</div>
-              <div class="opp" data-r><span class="opp__tag opp__tag--gold">Premiação</span> Convenção anual RedeCORR</div>
+              <div class="opp" data-r>
+                <span class="opp__tag opp__tag--new">Lead</span> PME · 12 vidas · pronto para
+                cotação
+              </div>
+              <div class="opp" data-r>
+                <span class="opp__tag">Campanha</span> Incentivo trimestral · bônus por produção
+              </div>
+              <div class="opp" data-r>
+                <span class="opp__tag">Parceria</span> Projeto exclusivo com operadora
+              </div>
+              <div class="opp" data-r>
+                <span class="opp__tag opp__tag--gold">Premiação</span> Convenção anual RedeCORR
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 09 · PILAR 5 PERFORMANCE -->
-      <section class="slide slide--light" data-title="Pilar 5 · Performance" data-pilar="5">
+      <!-- ===== 14 · PILAR 5 ===== -->
+      <section
+        class="slide slide--light"
+        data-title="Pilar 5 · Performance"
+        data-chapter="A metodologia"
+        data-pilar="5"
+      >
         <div class="slide-inner slide-inner--split">
           <div class="col-text">
-            <p class="eyebrow eyebrow--pilar" data-r>Pilar 05 / 05 · Performance</p>
+            <div class="pilar-head" data-r>
+              <svg class="mini-pent" viewBox="0 0 120 120" data-node="5" aria-hidden="true">
+                <path class="mini-pent__shape" d="M60 16 101.85 46.4 85.86 95.6 34.14 95.6 18.15 46.4Z" />
+                <circle class="mp-dot" cx="60" cy="16" r="6" />
+                <circle class="mp-dot" cx="101.85" cy="46.4" r="6" />
+                <circle class="mp-dot" cx="85.86" cy="95.6" r="6" />
+                <circle class="mp-dot" cx="34.14" cy="95.6" r="6" />
+                <circle class="mp-dot" cx="18.15" cy="46.4" r="6" />
+              </svg>
+              <span class="pilar-head__label">Pilar 5 de 5 · Performance</span>
+            </div>
             <h2 class="display" data-r>O que é medido, <em>cresce.</em></h2>
             <ul class="chip-list" data-r>
               <li>Indicadores</li>
@@ -348,44 +714,186 @@
           </div>
           <div class="col-visual">
             <div class="app-window dash" data-r>
-              <div class="app-window__bar"><i></i><i></i><i></i><span>Painel de performance</span></div>
+              <div class="app-window__bar">
+                <i></i><i></i><i></i><span>Painel de performance</span>
+              </div>
               <div class="dash__kpis">
                 <div class="kpi"><b><span data-count="32">0</span></b><span>vendas no mês</span></div>
                 <div class="kpi"><b><span data-count="24">0</span>%</b><span>conversão</span></div>
-                <div class="kpi"><b>R$ <span data-count="1840">0</span></b><span>ticket médio</span></div>
+                <div class="kpi">
+                  <b>R$ <span data-count="1840">0</span></b><span>ticket médio</span>
+                </div>
               </div>
               <div class="dash__chart" aria-hidden="true">
-                <i data-bar style="--h: 34%"></i><i data-bar style="--h: 46%"></i>
-                <i data-bar style="--h: 41%"></i><i data-bar style="--h: 62%"></i>
-                <i data-bar style="--h: 74%"></i><i data-bar style="--h: 92%"></i>
+                <i data-bar style="--h: 34%"></i><i data-bar style="--h: 46%"></i><i
+                  data-bar
+                  style="--h: 41%"
+                ></i><i data-bar style="--h: 62%"></i><i data-bar style="--h: 74%"></i><i
+                  data-bar
+                  style="--h: 92%"
+                ></i>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 10 · CRM -->
-      <section class="slide slide--dark" data-title="CRM">
+      <!-- ===== 15 · DIVISOR 03 ===== -->
+      <section
+        class="slide slide--dark slide--chapter"
+        data-title="Capítulo 03 · As plataformas"
+        data-chapter="As plataformas"
+      >
         <div class="bg-grid" aria-hidden="true"></div>
         <div class="bg-glow bg-glow--blue" aria-hidden="true"></div>
-        <div class="slide-inner slide-inner--center">
-          <p class="eyebrow" data-r>Dentro do ecossistema</p>
-          <h2 class="display display--big" data-r>Um CRM criado por quem <em>vive</em> a corretagem.</h2>
-          <p class="lead lead--center" data-r>
-            Linguagem do corretor. Fluxo do corretor. Ferramentas inteligentes que transformam
-            organização em produtividade.
-          </p>
-          <div class="cta-row" data-r>
-            <a class="btn btn--ghost" href="https://redecorr.com/crm" target="_blank" rel="noopener">Conheça o CRM →</a>
+        <div class="slide-inner chapter">
+          <span class="chapter__num" data-r>03</span>
+          <div class="chapter__text">
+            <h2 class="display display--big" data-r>As plataformas</h2>
+            <p class="lead" data-r>
+              Duas ferramentas próprias, construídas para a rotina de quem vende plano de saúde.
+            </p>
           </div>
         </div>
       </section>
 
-      <!-- 11 · ACADEMIA -->
-      <section class="slide slide--light" data-title="Academia de Vendas">
+      <!-- ===== 16 · ARQUITETURA DO ECOSSISTEMA ===== -->
+      <section
+        class="slide slide--dark"
+        data-title="Arquitetura do ecossistema"
+        data-chapter="As plataformas"
+      >
+        <div class="bg-grid" aria-hidden="true"></div>
+        <div class="bg-glow bg-glow--center" aria-hidden="true"></div>
+        <div class="slide-inner">
+          <p class="eyebrow eyebrow--center" data-r>Arquitetura</p>
+          <h2 class="display display--center" data-r>
+            Um ambiente único, <em>vários sistemas integrados.</em>
+          </h2>
+          <p class="lead lead--center" data-r>
+            Ecossistema aqui não é discurso: é como o produto foi construído. Você entra uma vez e
+            acessa todos os módulos, com cadastros de operadoras, produtos, tabelas e rede
+            compartilhados entre eles.
+          </p>
+          <div class="arch">
+            <div class="arch__mod" data-r>
+              <span class="arch__cat">CRM</span>
+              <b>Gestão comercial</b>
+              <span>Pipeline, cotações, conversas e portal do cliente</span>
+            </div>
+            <div class="arch__mod" data-r>
+              <span class="arch__cat">Gestor</span>
+              <b>Gestão empresarial</b>
+              <span>Rotina administrativa e financeira da operação</span>
+            </div>
+            <div class="arch__mod" data-r>
+              <span class="arch__cat">Corretora</span>
+              <b>Cotações unificadas</b>
+              <span>Vários ramos de seguros em uma só cotação</span>
+            </div>
+            <div class="arch__mod" data-r>
+              <span class="arch__cat">Qualidade</span>
+              <b>Qualidade e projetos</b>
+              <span>Processos sob ISO 9001 e gestão de projetos</span>
+            </div>
+          </div>
+          <div class="arch__core" data-r>
+            <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+              <ellipse cx="12" cy="5" rx="9" ry="3" /><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+              <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3" />
+            </svg>
+            Base compartilhada: operadoras, produtos, tabelas de preço e rede credenciada,
+            consultadas por todos os sistemas
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 17 · CRM ===== -->
+      <section class="slide slide--light" data-title="CRM" data-chapter="As plataformas">
         <div class="slide-inner slide-inner--split">
           <div class="col-text">
-            <p class="eyebrow" data-r>Academia de Vendas</p>
+            <p class="eyebrow" data-r>Plataforma 1 · CRM</p>
+            <h2 class="display" data-r>Um CRM criado por quem <em>vive</em> a corretagem.</h2>
+            <p class="lead" data-r>
+              Linguagem do corretor, fluxo do corretor. Do primeiro contato ao pós-venda, sem
+              planilha paralela.
+            </p>
+            <ul class="feat-list" data-r>
+              <li>
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M3 3v18h18" /><path d="m19 9-5 5-4-4-3 3" />
+                </svg>
+                <span><b>Pipeline por etapa</b> com valor potencial e temperatura do lead</span>
+              </li>
+              <li>
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="2" /><path d="M8 12h8" /><path
+                    d="M12 8v8"
+                  />
+                </svg>
+                <span><b>Cotador integrado</b> gerando proposta direto do lead</span>
+              </li>
+              <li>
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+                  />
+                </svg>
+                <span><b>Conversas de WhatsApp</b> centralizadas no mesmo lugar</span>
+              </li>
+              <li>
+                <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8" /><path
+                    d="M12 17v4"
+                  />
+                </svg>
+                <span><b>Portal do cliente</b> e relatórios executivos em PDF e Excel</span>
+              </li>
+            </ul>
+            <div class="cta-row cta-row--left" data-r>
+              <a
+                class="btn btn--primary"
+                href="https://redecorr.com/crm"
+                target="_blank"
+                rel="noopener"
+                >Conheça o CRM →</a
+              >
+            </div>
+          </div>
+          <div class="col-visual">
+            <div class="app-window" data-r>
+              <div class="app-window__bar">
+                <i></i><i></i><i></i><span>CRM redeCORR · dashboard</span>
+              </div>
+              <div class="dash__kpis dash__kpis--4">
+                <div class="kpi"><b><span data-count="128">0</span></b><span>leads recebidos</span></div>
+                <div class="kpi"><b><span data-count="94">0</span></b><span>ativos no funil</span></div>
+                <div class="kpi"><b><span data-count="38">0</span></b><span>ganhos</span></div>
+                <div class="kpi"><b><span data-count="29">0</span>%</b><span>conversão</span></div>
+              </div>
+              <div class="dash__chart" aria-hidden="true">
+                <i data-bar style="--h: 34%"></i><i data-bar style="--h: 46%"></i><i
+                  data-bar
+                  style="--h: 41%"
+                ></i><i data-bar style="--h: 62%"></i><i data-bar style="--h: 74%"></i><i
+                  data-bar
+                  style="--h: 92%"
+                ></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 17 · ACADEMIA ===== -->
+      <section
+        class="slide slide--light"
+        data-title="Academia de Vendas"
+        data-chapter="As plataformas"
+      >
+        <div class="slide-inner slide-inner--split">
+          <div class="col-text">
+            <p class="eyebrow" data-r>Plataforma 2 · Academia de Vendas</p>
             <h2 class="display" data-r>Treine <em>antes</em> da venda acontecer.</h2>
             <ul class="check-list" data-r>
               <li>Vários níveis de dificuldade</li>
@@ -393,14 +901,20 @@
               <li>Análise completa da conversa</li>
               <li>Pontuação e evolução contínua</li>
             </ul>
-            <p class="lead" data-r>Pratique quantas vezes quiser. Erre no treino, acerte no cliente.</p>
+            <p class="lead" data-r>
+              Pratique quantas vezes quiser. Erre no treino, acerte no cliente.
+            </p>
           </div>
           <div class="col-visual">
             <div class="chat-window" data-r>
-              <div class="app-window__bar"><i></i><i></i><i></i><span>Simulação · nível difícil</span></div>
+              <div class="app-window__bar">
+                <i></i><i></i><i></i><span>Simulação · nível difícil</span>
+              </div>
               <div class="chat" data-chat>
                 <div class="msg msg--persona">Vou pensar e te retorno depois, pode ser?</div>
-                <div class="msg msg--broker">Claro! Só antes de encerrar: qual ponto ficou menos claro? Posso resolver agora.</div>
+                <div class="msg msg--broker">
+                  Claro! Só antes de encerrar: qual ponto ficou menos claro? Posso resolver agora.
+                </div>
                 <div class="msg msg--ia">
                   <span class="msg--ia__tag">Análise da IA</span>
                   Excelente tentativa de fechamento sem pressão.
@@ -412,8 +926,74 @@
         </div>
       </section>
 
-      <!-- 12 · BENEFÍCIOS -->
-      <section class="slide slide--light" data-title="Benefícios">
+      <!-- ===== 18 · DIVISOR 04 ===== -->
+      <section
+        class="slide slide--dark slide--chapter"
+        data-title="Capítulo 04 · O resultado"
+        data-chapter="O resultado"
+      >
+        <div class="bg-grid" aria-hidden="true"></div>
+        <div class="bg-glow bg-glow--blue" aria-hidden="true"></div>
+        <div class="slide-inner chapter">
+          <span class="chapter__num" data-r>04</span>
+          <div class="chapter__text">
+            <h2 class="display display--big" data-r>O resultado</h2>
+            <p class="lead" data-r>O que muda na prática quando a estrutura entra em operação.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 19 · ANTES E DEPOIS ===== -->
+      <section class="slide slide--light" data-title="Antes e depois" data-chapter="O resultado">
+        <div class="slide-inner">
+          <p class="eyebrow eyebrow--center" data-r>A diferença</p>
+          <h2 class="display display--center" data-r>
+            A mesma pessoa, <em>outra operação.</em>
+          </h2>
+          <div class="compare">
+            <div class="compare__head compare__head--before" data-r>Corretor sozinho</div>
+            <div class="compare__head compare__head--after" data-r>Corretor RedeCORR</div>
+
+            <div class="compare__cell compare__cell--before" data-r>
+              Leads anotados no caderno e no WhatsApp
+            </div>
+            <div class="compare__cell compare__cell--after" data-r>
+              Funil comercial completo dentro do CRM
+            </div>
+
+            <div class="compare__cell compare__cell--before" data-r>
+              Cotação manual, refeita a cada pedido
+            </div>
+            <div class="compare__cell compare__cell--after" data-r>
+              Cotador inteligente e proposta pronta em minutos
+            </div>
+
+            <div class="compare__cell compare__cell--before" data-r>
+              Treino só na prática, errando com cliente real
+            </div>
+            <div class="compare__cell compare__cell--after" data-r>
+              Simulação com IA antes de entrar na reunião
+            </div>
+
+            <div class="compare__cell compare__cell--before" data-r>
+              Presença digital improvisada
+            </div>
+            <div class="compare__cell compare__cell--after" data-r>
+              Site, landing pages e criativos profissionais
+            </div>
+
+            <div class="compare__cell compare__cell--before" data-r>
+              Resultado medido no feeling
+            </div>
+            <div class="compare__cell compare__cell--after" data-r>
+              Indicadores de produtividade e conversão
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 20 · BENEFÍCIOS ===== -->
+      <section class="slide slide--light" data-title="Benefícios" data-chapter="O resultado">
         <div class="slide-inner">
           <p class="eyebrow eyebrow--center" data-r>O ecossistema completo</p>
           <h2 class="display display--center" data-r>Tudo isso acompanha <em>você.</em></h2>
@@ -434,11 +1014,57 @@
         </div>
       </section>
 
-      <!-- 13 · COMO FUNCIONA -->
-      <section class="slide slide--light" data-title="Como funciona">
+      <!-- ===== 21 · PARA QUEM É ===== -->
+      <section class="slide slide--light" data-title="Para quem é" data-chapter="O resultado">
+        <div class="slide-inner">
+          <p class="eyebrow eyebrow--center" data-r>Para quem é</p>
+          <h2 class="display display--center" data-r>
+            Feito para quem vive de <em>vender saúde.</em>
+          </h2>
+          <div class="who-grid">
+            <div class="who" data-r>
+              <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19 21a7 7 0 0 0-14 0" /><circle cx="12" cy="8" r="5" />
+              </svg>
+              <b>Corretores</b>
+              <span>Quem quer profissionalizar a operação e vender mais</span>
+            </div>
+            <div class="who" data-r>
+              <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 3v18h18" /><path d="m19 9-5 5-4-4-3 3" />
+              </svg>
+              <b>Produtores</b>
+              <span>Quem vive de produção e precisa de volume constante</span>
+            </div>
+            <div class="who" data-r>
+              <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle
+                  cx="9"
+                  cy="7"
+                  r="4"
+                /><path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              </svg>
+              <b>Supervisores</b>
+              <span>Quem acompanha equipe e precisa de indicadores reais</span>
+            </div>
+            <div class="who" data-r>
+              <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 21h18" /><path d="M5 21V7l8-4v18" /><path d="M19 21V11l-6-4" />
+              </svg>
+              <b>Gestores e corretoras</b>
+              <span>Quem quer escalar time com processo e tecnologia</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 22 · COMO FUNCIONA ===== -->
+      <section class="slide slide--light" data-title="Como funciona" data-chapter="O resultado">
         <div class="slide-inner">
           <p class="eyebrow eyebrow--center" data-r>Como funciona</p>
-          <h2 class="display display--center" data-r>Do cadastro à venda em <em>cinco passos.</em></h2>
+          <h2 class="display display--center" data-r>
+            Do cadastro à venda em <em>cinco passos.</em>
+          </h2>
           <div class="steps">
             <div class="step" data-r><b>1</b><span>Cadastre-se</span></div>
             <div class="step" data-r><b>2</b><span>Conheça o CORE5<sup>®</sup></span></div>
@@ -446,11 +1072,19 @@
             <div class="step" data-r><b>4</b><span>Acesse as ferramentas</span></div>
             <div class="step step--last" data-r><b>5</b><span>Venda mais</span></div>
           </div>
+          <p class="lead lead--center" data-r>
+            Sem migração dolorida e sem começar do zero: sua carteira entra organizada e as
+            ferramentas ficam disponíveis desde o primeiro dia.
+          </p>
         </div>
       </section>
 
-      <!-- 14 · CTA FINAL -->
-      <section class="slide slide--dark slide--cover" data-title="CTA final">
+      <!-- ===== 23 · CTA FINAL ===== -->
+      <section
+        class="slide slide--dark slide--cover"
+        data-title="Faça parte"
+        data-chapter="O resultado"
+      >
         <div class="bg-grid" aria-hidden="true"></div>
         <div class="bg-glow bg-glow--blue" aria-hidden="true"></div>
         <div class="slide-inner slide-inner--center">
@@ -460,13 +1094,65 @@
             está transformando a corretagem de planos de saúde.
           </p>
           <div class="cta-row" data-r>
-            <a class="btn btn--primary" href="https://wa.me/5592995339774" target="_blank" rel="noopener">Quero fazer parte da RedeCORR</a>
-            <a class="btn btn--ghost" href="https://redecorr.com/crm" target="_blank" rel="noopener">Conheça o CRM</a>
+            <a
+              class="btn btn--primary"
+              href="https://wa.me/5592995339774"
+              target="_blank"
+              rel="noopener"
+              >Quero fazer parte da RedeCORR</a
+            >
+            <a class="btn btn--ghost" href="https://redecorr.com/crm" target="_blank" rel="noopener"
+              >Conheça o CRM</a
+            >
           </div>
-          <p class="hint" data-r>redecorr.com</p>
+          <div class="contact-row" data-r>
+            <a class="contact" href="https://redecorr.com" target="_blank" rel="noopener">
+              <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" /><path d="M2 12h20" /><path
+                  d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                />
+              </svg>
+              redecorr.com
+            </a>
+            <a class="contact" href="https://wa.me/5592995339774" target="_blank" rel="noopener">
+              <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+                />
+              </svg>
+              (92) 99533-9774
+            </a>
+            <a
+              class="contact"
+              href="https://www.instagram.com/redecorrconsultores/"
+              target="_blank"
+              rel="noopener"
+            >
+              <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="4" />
+                <line x1="17.5" y1="6.5" x2="17.5" y2="6.5" />
+              </svg>
+              @redecorrconsultores
+            </a>
+          </div>
         </div>
       </section>
     </main>
+
+    <!-- ============ ÍNDICE ============ -->
+    <div class="index-overlay" data-index hidden>
+      <div class="index-panel" role="dialog" aria-label="Índice da apresentação">
+        <div class="index-head">
+          <span class="index-title">Índice</span>
+          <button class="index-close" type="button" data-index-close aria-label="Fechar índice">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18 6 6 18" /><path d="m6 6 12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="index-list" data-index-list></div>
+      </div>
+    </div>
 
     <button class="nav-button nav-button--prev" type="button" aria-label="Slide anterior" data-prev>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7" /></svg>
@@ -476,7 +1162,7 @@
     </button>
 
     <footer class="hud hud--bottom">
-      <div class="slide-count"><span data-current>01</span> / <span data-total>14</span></div>
+      <div class="slide-count"><span data-current>01</span> / <span data-total>24</span></div>
       <div class="dots" data-dots role="tablist" aria-label="Slides"></div>
       <div class="progress" aria-hidden="true"><span data-progress></span></div>
     </footer>
