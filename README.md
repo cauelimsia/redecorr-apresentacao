@@ -58,13 +58,16 @@ Cada slide declara seu estado por atributo, sem tocar no JavaScript:
 - `data-fx-labels="off"` — mostra a formação sem nomear os pilares
 - `data-fx-scale` e `data-fx-off` — afinam tamanho e deslocamento quando o slide tem texto grande do lado esquerdo
 
-## Telas reais do produto
+## Vídeos reais do produto
 
-Os slides do pilar Tecnologia e da plataforma CRM mostram **capturas reais do CRM de produção** — o pipeline de leads e o dashboard executivo — dentro do chrome de janela do deck, com um pan lento contínuo (efeito Ken Burns) e a inclinação que segue o ponteiro.
+Os slides do pilar Tecnologia e da plataforma CRM mostram **gravações reais do CRM em modo demonstração** — o modo do próprio produto que serve dados fictícios em regime somente-leitura, com a faixa "Modo Demonstração — Dados fictícios" visível no topo. Nada foi desenhado ou retocado: é o software de produção sendo navegado.
 
-Antes de cada captura, **todo dado real foi substituído por dado fictício direto no DOM**: nomes de leads, telefones, valores, iniciais de avatar, fotos de perfil e nomes de consultores. Nenhum dado real de lead aparece em material público. Cada captura carrega o selo "Tela real · dados fictícios" no canto — o que é transparência, não rodapé jurídico.
+- **Pipeline** (pilar 1): o kanban de leads percorrido da primeira à última etapa, com hover real nos cards.
+- **Conversas** (plataforma CRM): a central de WhatsApp com uma negociação completa em tela e a busca filtrando a lista ao vivo, tecla a tecla.
 
-A Academia de Vendas segue com o mockup de simulação até existir acesso público ao app para capturar do mesmo jeito.
+Os vídeos são MP4 (H.264) de ~100 KB servidos do próprio repositório, em loop mudo (`autoplay muted loop playsinline`), com poster JPEG para o primeiro paint. Com `prefers-reduced-motion`, ficam parados no poster. Foram gravados como sequência de frames via Playwright e montados com ffmpeg — o rAF de aba oculta não estrangula screenshot, então a cadência é estável.
+
+Limite conhecido do modo demonstração: o dashboard BI mistura widgets com dados reais (o card diário "Ontem" expõe nome de corretor real), então o dashboard ficou fora dos vídeos. A Academia de Vendas segue com o mockup de simulação até existir acesso ao app para gravar do mesmo jeito.
 
 ## Parceiros (slide 19)
 

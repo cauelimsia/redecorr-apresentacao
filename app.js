@@ -408,6 +408,18 @@
     };
   })();
 
+  /* ---------- Vídeos do produto ---------- */
+
+  // Gravações reais do CRM em modo demonstração. Com prefers-reduced-motion,
+  // ficam parados no poster.
+  (function initShots() {
+    if (animate) return;
+    document.querySelectorAll(".shot video").forEach((v) => {
+      v.removeAttribute("autoplay");
+      v.pause();
+    });
+  })();
+
   /* ---------- Inclinação dos mockups ---------- */
 
   // A janela do produto segue o ponteiro em três dimensões: de longe parece

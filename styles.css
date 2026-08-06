@@ -800,45 +800,11 @@ body.theme-light .fx-label.is-focus {
   overflow: hidden;
 }
 
+.shot video,
 .shot img {
   display: block;
   width: 100%;
   height: auto;
-  transform-origin: 30% 20%;
-  animation: shotPan 32s ease-in-out infinite alternate;
-  will-change: transform;
-}
-
-@keyframes shotPan {
-  from {
-    transform: scale(1) translate3d(0, 0, 0);
-  }
-  to {
-    transform: scale(1.07) translate3d(-1.8%, -2.2%, 0);
-  }
-}
-
-.shot__tag {
-  position: absolute;
-  right: 0.6rem;
-  bottom: 0.6rem;
-  font-family: var(--font-mono);
-  font-size: 0.56rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--slate);
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  padding: 0.28rem 0.5rem;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .shot img {
-    animation: none;
-  }
 }
 
 /* Pipeline do CRM */
