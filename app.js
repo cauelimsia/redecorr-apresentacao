@@ -148,17 +148,6 @@
     });
   }
 
-  function prepLines(svg) {
-    svg.querySelectorAll(".net-lines line").forEach((ln) => {
-      const len = Math.hypot(
-        ln.x2.baseVal.value - ln.x1.baseVal.value,
-        ln.y2.baseVal.value - ln.y1.baseVal.value
-      );
-      ln.style.strokeDasharray = len;
-      ln.style.strokeDashoffset = len;
-    });
-  }
-
   function enterAnimations(slide, tl) {
     // Títulos entram por cortina (o texto é descoberto de cima para baixo),
     // o resto sobe. Separar os dois evita que tudo pareça o mesmo movimento.
@@ -212,14 +201,8 @@
       tl.call(() => strike.classList.add("is-struck"), null, 0.9);
     }
 
-    // Pentágono grande e rede da capa: desenha linhas, depois nós
+    // Pentágono grande e rede da capa: só os cinco nós acendem, em sequência
     slide.querySelectorAll(".core-pent, .cover-net").forEach((svg) => {
-      prepLines(svg);
-      tl.to(
-        svg.querySelectorAll(".net-lines line"),
-        { strokeDashoffset: 0, duration: 1.1, stagger: 0.06, ease: "power2.inOut" },
-        0.3
-      );
       const nodes = svg.querySelectorAll(".net-nodes circle, .pent-node");
       if (nodes.length) {
         tl.fromTo(

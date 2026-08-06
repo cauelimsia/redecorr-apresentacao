@@ -398,11 +398,6 @@ body.theme-light .fx-label.is-focus {
   pointer-events: none;
 }
 
-.net-lines line {
-  stroke: rgba(110, 168, 255, 0.55);
-  stroke-width: 0.9;
-}
-
 .net-nodes circle {
   fill: var(--sky);
 }
@@ -569,11 +564,6 @@ body.theme-light .fx-label.is-focus {
   margin-inline: auto;
   display: block;
   overflow: visible;
-}
-
-.core-pent .net-lines line {
-  stroke: rgba(110, 168, 255, 0.3);
-  stroke-width: 0.9;
 }
 
 .pent-node circle {

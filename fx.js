@@ -21,6 +21,9 @@ import * as THREE from "./vendor/three.module.min.js";
 const COUNT = 2800;
 const FAR_COUNT = 900;
 const R = 15;
+// raio do halo de cada nó, em unidades de mundo: define o tamanho do ponto de
+// luz e o afastamento dos rótulos
+const HALO = 4.4;
 
 /* ---------- utilidades ---------- */
 
@@ -43,42 +46,24 @@ for (let i = 0; i < 5; i++) {
   NODES.push(new THREE.Vector3(Math.cos(a) * R, -Math.sin(a) * R, 0));
 }
 
-// Só o anel externo. O grafo completo K5 desenha as cinco diagonais, e
-// pentágono com diagonais é literalmente o pentagrama — leitura esotérica
-// que não cabe numa apresentação institucional.
-const EDGES = [];
-for (let i = 0; i < 5; i++) EDGES.push([i, (i + 1) % 5]);
-
 /* ---------- formações ---------- */
 
+// Cinco pontos de luz, sem nenhuma linha ligando. Qualquer traço entre os
+// vértices de um pentágono puxa a leitura para estrela/pentagrama, que não
+// tem nada a ver com o CORE5®.
 function fmtPentagon() {
   const pos = new Float32Array(COUNT * 3);
   const node = new Float32Array(COUNT);
-  const clusterCount = Math.floor(COUNT * 0.55);
   for (let i = 0; i < COUNT; i++) {
-    let x, y, z, n;
-    if (i < clusterCount) {
-      n = i % 5;
-      const c = NODES[n];
-      const r = 2.6 * Math.cbrt(rnd());
-      const th = rnd() * Math.PI * 2;
-      const ph = Math.acos(2 * rnd() - 1);
-      x = c.x + r * Math.sin(ph) * Math.cos(th);
-      y = c.y + r * Math.sin(ph) * Math.sin(th);
-      z = c.z + r * Math.cos(ph) * 0.7;
-    } else {
-      const e = EDGES[(i - clusterCount) % EDGES.length];
-      const a = NODES[e[0]];
-      const b = NODES[e[1]];
-      const t = rnd();
-      x = a.x + (b.x - a.x) * t + (rnd() - 0.5) * 0.7;
-      y = a.y + (b.y - a.y) * t + (rnd() - 0.5) * 0.7;
-      z = (rnd() - 0.5) * 1.2;
-      n = -1;
-    }
-    pos[i * 3] = x;
-    pos[i * 3 + 1] = y;
-    pos[i * 3 + 2] = z;
+    const n = i % 5;
+    const c = NODES[n];
+    // núcleo denso com halo solto em volta: o ponto tem peso sem virar bola
+    const r = (i % 7 < 5 ? HALO * 0.61 : HALO) * Math.cbrt(rnd());
+    const th = rnd() * Math.PI * 2;
+    const ph = Math.acos(2 * rnd() - 1);
+    pos[i * 3] = c.x + r * Math.sin(ph) * Math.cos(th);
+    pos[i * 3 + 1] = c.y + r * Math.sin(ph) * Math.sin(th);
+    pos[i * 3 + 2] = c.z + r * Math.cos(ph) * 0.7;
     node[i] = n;
   }
   return { pos, node };
@@ -254,39 +239,6 @@ void main() {
 }
 `;
 
-// Arestas que se energizam: cada uma se desenha da origem ao destino,
-// escalonadas, como um circuito ligando.
-const LINE_VERT = `
-attribute float aT;
-attribute float aEdge;
-varying float vT;
-varying float vEdge;
-void main() {
-  vT = aT;
-  vEdge = aEdge;
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-}
-`;
-
-const LINE_FRAG = `
-precision mediump float;
-uniform vec3 uColor;
-uniform float uOpacity;
-uniform float uProgress;
-uniform float uCount;
-varying float vT;
-varying float vEdge;
-
-void main() {
-  float start = (vEdge / uCount) * 0.55;
-  float local = clamp((uProgress - start) / 0.45, 0.0, 1.0);
-  if (vT > local) discard;
-  // ponta da linha mais brilhante enquanto desenha
-  float head = smoothstep(local - 0.12, local, vT) * (1.0 - step(0.999, local));
-  gl_FragColor = vec4(uColor, uOpacity * (0.55 + head * 0.9));
-}
-`;
-
 /* ---------- cena ---------- */
 
 function boot() {
@@ -440,43 +392,9 @@ function boot() {
   );
   group.add(cores);
 
-  /* --- arestas do pentágono --- */
-  const linePos = new Float32Array(EDGES.length * 6);
-  const lineT = new Float32Array(EDGES.length * 2);
-  const lineE = new Float32Array(EDGES.length * 2);
-  EDGES.forEach((e, i) => {
-    const a = NODES[e[0]];
-    const b = NODES[e[1]];
-    linePos.set([a.x, a.y, a.z, b.x, b.y, b.z], i * 6);
-    lineT.set([0, 1], i * 2);
-    lineE.set([i, i], i * 2);
-  });
-  const lineGeo = new THREE.BufferGeometry();
-  lineGeo.setAttribute("position", new THREE.BufferAttribute(linePos, 3));
-  lineGeo.setAttribute("aT", new THREE.BufferAttribute(lineT, 1));
-  lineGeo.setAttribute("aEdge", new THREE.BufferAttribute(lineE, 1));
-
-  const lineUniforms = {
-    uColor: { value: new THREE.Color("#6ea8ff") },
-    uOpacity: { value: 0 },
-    uProgress: { value: 0 },
-    uCount: { value: EDGES.length },
-  };
-  const lines = new THREE.LineSegments(
-    lineGeo,
-    new THREE.ShaderMaterial({
-      uniforms: lineUniforms,
-      vertexShader: LINE_VERT,
-      fragmentShader: LINE_FRAG,
-      transparent: true,
-      depthWrite: false,
-    })
-  );
-  group.add(lines);
-
   /* ---------- estado ---------- */
 
-  const state = { form: null, rotY: 0, pointerX: 0, pointerY: 0, tgtX: 0, tgtY: 0 };
+  const state = { el: null, form: null, rotY: 0, pointerX: 0, pointerY: 0, tgtX: 0, tgtY: 0 };
   const G = window.gsap;
 
   function narrowScale() {
@@ -562,16 +480,31 @@ function boot() {
     // projeta na caixa do canvas (o painel do apresentador reduz a altura)
     const w = canvas.clientWidth || window.innerWidth;
     const h = canvas.clientHeight || window.innerHeight;
+    // centro da formação em pixels: a direção de fuga de cada rótulo sai daqui
+    proj.set(0, 0, 0).applyMatrix4(group.matrixWorld).project(camera);
+    const cx = (proj.x * 0.5 + 0.5) * w;
+    const cy = (-proj.y * 0.5 + 0.5) * h;
+
     for (let i = 0; i < labelEls.length; i++) {
       proj.copy(NODES[i]).applyMatrix4(group.matrixWorld).project(camera);
       const x = (proj.x * 0.5 + 0.5) * w;
       const y = (-proj.y * 0.5 + 0.5) * h;
-      const dx = NODES[i].x === 0 ? 0 : Math.sign(NODES[i].x);
-      const dy = Math.sign(NODES[i].y);
+
+      // Empurra o rótulo radialmente para fora, numa distância proporcional ao
+      // tamanho do nó em tela: assim ele fica fora do halo em qualquer zoom,
+      // escala ou proporção, sem número mágico calibrado num monitor só.
+      let ux = x - cx;
+      let uy = y - cy;
+      const len = Math.hypot(ux, uy) || 1;
+      ux /= len;
+      uy /= len;
+      const gap = len * (HALO / R) + 22;
+
       // trava dentro da tela: rótulo nunca sai pela borda
       const half = labelEls[i].offsetWidth / 2 + 12;
-      const lx = Math.min(Math.max(x + dx * 58, half), w - half);
-      labelEls[i].style.transform = `translate(-50%, -50%) translate(${lx}px, ${y - dy * 34}px)`;
+      const lx = Math.min(Math.max(x + ux * gap, half), w - half);
+      const ly = y + uy * gap;
+      labelEls[i].style.transform = `translate(-50%, -50%) translate(${lx}px, ${ly}px)`;
       labelEls[i].classList.toggle("is-focus", uniforms.uFocus.value === i);
     }
   }
@@ -580,6 +513,9 @@ function boot() {
 
   function setSlide(el) {
     if (!el) return;
+    // Guarda o slide corrente: durante a transição dois slides carregam
+    // .is-active, então procurar no DOM devolve o que está saindo.
+    state.el = el;
     const form = el.dataset.fx || "constellation";
     const focus = el.dataset.fxFocus ? parseInt(el.dataset.fxFocus, 10) - 1 : -1;
     const light = el.classList.contains("slide--light");
@@ -597,16 +533,16 @@ function boot() {
     const colHi = light ? "#1d4ed8" : "#ffffff";
     tween(uniforms.uColor.value, { ...new THREE.Color(col), duration: 0.8, ease: "power2.out" });
     tween(uniforms.uColorHi.value, { ...new THREE.Color(colHi), duration: 0.8, ease: "power2.out" });
-    lineUniforms.uColor.value.set(col);
     tween(farUniforms.uColor.value, {
       ...new THREE.Color(light ? "#9db4d8" : "#6ea8ff"),
       duration: 0.8,
     });
 
     let op = light ? 0.55 : 0.9;
-    if (dim) op *= form === "pentagon" ? 0.3 : 0.4;
+    if (dim) op *= form === "pentagon" ? 0.22 : 0.4;
     if (form === "pentagon" && !dim) op = light ? 0.8 : 1;
-    if (place === "center" && !dim) op *= 0.48;
+    // centralizada, a cena passa por trás do texto: recua para não competir
+    if (place === "center" && !dim) op *= 0.36;
     // no celular a cena fica atrás do texto, não ao lado dele
     if (narrow) op *= 0.7;
     tween(uniforms.uOpacity, { value: op, duration: 0.9, ease: "power2.out" });
@@ -627,27 +563,8 @@ function boot() {
       ease: "power2.out",
     });
 
-    // arestas energizam como circuito depois que a formação assenta
-    if (form === "pentagon") {
-      lineUniforms.uProgress.value = 0;
-      tween(lineUniforms.uOpacity, {
-        value: dim ? 0.12 : light ? 0.3 : 0.5,
-        duration: 0.5,
-        delay: 0.85,
-      });
-      tween(lineUniforms.uProgress, {
-        value: 1,
-        duration: 1.5,
-        delay: 0.85,
-        ease: "power2.inOut",
-        overwrite: true,
-      });
-    } else {
-      tween(lineUniforms.uOpacity, { value: 0, duration: 0.5, ease: "power2.out" });
-    }
-
-    // Deslocamento derivado do campo de visão da câmera atual: assim o
-    // pentágono ocupa a coluna direita sem estourar a borda em nenhum
+    // Deslocamento derivado do campo de visão da câmera atual: assim a
+    // formação ocupa a coluna direita sem estourar a borda em nenhum
     // enquadramento nem em nenhuma proporção de tela.
     const cam = CAMS[camFor(form, dim, el.dataset.cam)] || CAMS.wide;
     const halfH = Math.tan((45 * Math.PI) / 360) * cam.pos[2];
@@ -707,7 +624,7 @@ function boot() {
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
     renderer.setSize(w, h, false);
-    const active = document.querySelector(".slide.is-active");
+    const active = state.el || document.querySelector(".slide.is-active");
     if (active) setSlide(active);
   }
   window.addEventListener("resize", resize, { passive: true });

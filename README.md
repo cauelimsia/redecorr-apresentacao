@@ -39,9 +39,9 @@ Nos slides de pilar o nó correspondente acende e a formação gira para apresen
 
 A capa já abre no pentágono: o CORE5® é o assunto da apresentação, então ele é a primeira coisa que a sala vê, ainda sem os nomes dos pilares (a nomeação é a virada do capítulo da metodologia).
 
-O pentágono usa só o anel externo. O grafo completo, com as cinco diagonais, desenha literalmente um pentagrama, leitura esotérica que não cabe aqui.
+A formação é de cinco pontos de luz, sem nenhuma linha ligando um ao outro. Qualquer traço entre os vértices puxa a leitura para estrela, e o grafo completo desenha literalmente um pentagrama. Os cinco pilares aparecem como cinco núcleos, que é o que a metodologia é.
 
-A cena tem três camadas: um campo distante que gira ao contrário e cria paralaxe, o organismo de 2.800 partículas e núcleos com brilho aditivo nos cinco vértices. As arestas do pentágono não aparecem prontas — elas se desenham escalonadas, como um circuito ligando. A câmera voa entre cinco enquadramentos (`wide`, `close`, `low`, `hover`, `inside`) conforme a formação, e o deslocamento lateral é derivado do campo de visão, então a composição não estoura em nenhuma proporção de tela.
+A cena tem três camadas: um campo distante que gira ao contrário e cria paralaxe, o organismo de 2.800 partículas e núcleos com brilho aditivo nos cinco vértices. Os rótulos fogem radialmente do centro, a uma distância proporcional ao tamanho do nó em tela, então ficam fora do halo em qualquer zoom ou proporção. A câmera voa entre cinco enquadramentos (`wide`, `close`, `low`, `hover`, `inside`) conforme a formação, e o deslocamento lateral é derivado do campo de visão, então a composição não estoura em nenhuma proporção de tela.
 
 Cada slide declara seu estado por atributo, sem tocar no JavaScript:
 
