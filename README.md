@@ -71,7 +71,7 @@ Limite conhecido do modo demonstração: o dashboard BI mistura widgets com dado
 
 ## Parceiros (slide 19)
 
-Fecho do capítulo das plataformas: as sete operadoras e administradoras parceiras (Plano A, Select, Go Care, Salv, OdontoGroup, Saúde Prime e Rede Total) numa parede tipográfica uniforme — grade retangular 4 + 3 com divisores de 1px, numeração em Mono e marcas em Serif. Sem logos de terceiros: tratamento tipográfico único mantém a página com cara de relatório institucional e evita disputa visual entre marcas.
+Fecho do capítulo das plataformas: as sete operadoras e administradoras parceiras (Plano A, Select, GoCare, Salv, OdontoGroup, Saúde Prime e Rede Total) com **as logos oficiais** numa grade retangular 4 + 3 com divisores de 1px e numeração em Mono. As logos vieram dos sites oficiais de cada operadora (`assets/partners/`), sem redesenho — apenas altura normalizada por formato.
 
 ## Simulação ao vivo (slide 22)
 
