@@ -988,7 +988,119 @@
         </div>
       </section>
 
-      <!-- ===== 20 · BENEFÍCIOS ===== -->
+      <!-- ===== 20 · SIMULAÇÃO ===== -->
+      <section
+        class="slide slide--dark"
+        data-title="Simulação"
+        data-notes="Pergunte os números dele em voz alta e mexa nos controles na frente do cliente. O ponto não é prometer resultado: é mostrar que um fechamento a mais por semana muda o ano inteiro. Se ele não souber os números, isso já é o argumento."
+        data-fx="constellation"
+        data-fx-dim="1"
+        data-chapter="O resultado"
+      >
+        <div class="bg-grid" aria-hidden="true"></div>
+        <div class="bg-glow bg-glow--blue" aria-hidden="true"></div>
+        <div class="slide-inner">
+          <p class="eyebrow" data-r>Simulação ao vivo</p>
+          <h2 class="display" data-r>Faça a conta com <em>os seus números.</em></h2>
+
+          <div class="sim" data-sim>
+            <div class="sim__controls" data-r>
+              <label class="sim__field">
+                <span class="sim__lbl">
+                  Leads por mês
+                  <b data-sim-out="leads">80</b>
+                </span>
+                <input
+                  class="sim__range"
+                  type="range"
+                  min="10"
+                  max="400"
+                  step="5"
+                  value="80"
+                  data-sim-in="leads"
+                  aria-label="Leads por mês"
+                />
+              </label>
+
+              <label class="sim__field">
+                <span class="sim__lbl">
+                  Taxa de fechamento
+                  <b data-sim-out="taxa">12%</b>
+                </span>
+                <input
+                  class="sim__range"
+                  type="range"
+                  min="2"
+                  max="40"
+                  step="1"
+                  value="12"
+                  data-sim-in="taxa"
+                  aria-label="Taxa de fechamento em porcento"
+                />
+              </label>
+
+              <label class="sim__field">
+                <span class="sim__lbl">
+                  Ticket médio mensal
+                  <b data-sim-out="ticket">R$ 420</b>
+                </span>
+                <input
+                  class="sim__range"
+                  type="range"
+                  min="150"
+                  max="1500"
+                  step="10"
+                  value="420"
+                  data-sim-in="ticket"
+                  aria-label="Ticket médio mensal em reais"
+                />
+              </label>
+            </div>
+
+            <div class="sim__result" data-r>
+              <div class="sim__now">
+                <span class="sim__cap">Sua operação hoje</span>
+                <p class="sim__big"><span data-sim-out="contratos">9,6</span> <i>contratos/mês</i></p>
+                <p class="sim__sub">
+                  <span data-sim-out="receita">R$ 4.032</span> em receita mensal nova
+                </p>
+              </div>
+
+              <div class="sim__delta">
+                <span class="sim__cap">Um fechamento a mais por semana</span>
+                <p class="sim__big sim__big--up">
+                  <span data-sim-out="contratos2">13,9</span> <i>contratos/mês</i>
+                </p>
+                <p class="sim__sub">
+                  <span data-sim-out="receita2">R$ 5.838</span> em receita mensal nova
+                </p>
+              </div>
+
+              <div class="sim__bars" aria-hidden="true">
+                <div class="sim__bar">
+                  <span class="sim__barfill" data-sim-bar="a"></span>
+                </div>
+                <div class="sim__bar">
+                  <span class="sim__barfill sim__barfill--up" data-sim-bar="b"></span>
+                </div>
+              </div>
+
+              <p class="sim__year">
+                Diferença acumulada em doze meses:
+                <b data-sim-out="ano">R$ 140.868</b>
+              </p>
+            </div>
+          </div>
+
+          <p class="source" data-r>
+            Aritmética com os números que você informar: leads × taxa de fechamento × ticket. Um
+            fechamento a mais por semana equivale a 4,3 por mês. O acumulado de doze meses considera
+            a carteira somando mês a mês, sem descontar cancelamentos. Não é promessa de resultado.
+          </p>
+        </div>
+      </section>
+
+      <!-- ===== 21 · BENEFÍCIOS ===== -->
       <section class="slide slide--light" data-title="Benefícios" data-notes="Não leia item por item. Diga: &quot;tudo isso acompanha você&quot; e pergunte qual desses resolveria o problema de hoje." data-fx="constellation" data-fx-dim="1" data-chapter="O resultado">
         <div class="slide-inner">
           <p class="eyebrow eyebrow--center" data-r>O ecossistema completo</p>
@@ -1010,7 +1122,7 @@
         </div>
       </section>
 
-      <!-- ===== 21 · PARA QUEM É ===== -->
+      <!-- ===== 23 · PARA QUEM É ===== -->
       <section class="slide slide--light" data-title="Para quem é" data-notes="Confirme o perfil de quem está na sala e pare no card dele." data-fx="constellation" data-fx-dim="1" data-chapter="O resultado">
         <div class="slide-inner">
           <p class="eyebrow eyebrow--center" data-r>Para quem é</p>
@@ -1054,7 +1166,7 @@
         </div>
       </section>
 
-      <!-- ===== 22 · COMO FUNCIONA ===== -->
+      <!-- ===== 24 · COMO FUNCIONA ===== -->
       <section class="slide slide--light" data-title="Como funciona" data-notes="Reduza a fricção: sem migração dolorida, ferramentas disponíveis desde o primeiro dia." data-fx="constellation" data-fx-dim="1" data-chapter="O resultado">
         <div class="slide-inner">
           <p class="eyebrow eyebrow--center" data-r>Como funciona</p>
@@ -1075,7 +1187,7 @@
         </div>
       </section>
 
-      <!-- ===== 23 · CTA FINAL ===== -->
+      <!-- ===== 25 · CTA FINAL ===== -->
       <section
         class="slide slide--dark slide--cover"
         data-title="Faça parte" data-notes="Peça o compromisso concreto: agendar a ativação ou receber o acesso hoje. Os contatos estão na tela." data-fx-x="center" data-fx="burst"

@@ -259,6 +259,11 @@
       tl.fromTo(bars, { scaleY: 0 }, { scaleY: 1, duration: 0.7, stagger: 0.09, ease: "power3.out" }, 0.6);
     }
 
+    // Simulador: barras crescem do zero quando o slide entra
+    if (simEnter && slide.querySelector("[data-sim]")) {
+      tl.call(simEnter, null, 0.4);
+    }
+
     // Chat: mensagens em sequência, como numa conversa real
     slide.querySelectorAll("[data-chat]").forEach((chat) => {
       tl.fromTo(
@@ -331,6 +336,124 @@
         .to(typing, { autoAlpha: 0, duration: 0.2 }, 1.85);
     });
   }
+
+  /* ---------- Simulador da operação ---------- */
+
+  // Aritmética com os números que o cliente informa na hora. Nenhum
+  // coeficiente escondido: leads × taxa × ticket, e o cenário é só
+  // um fechamento a mais por semana.
+  let simEnter = null;
+
+  (function initSim() {
+    const sim = document.querySelector("[data-sim]");
+    if (!sim) return;
+
+    const ins = {};
+    const outs = {};
+    const bars = {};
+    sim.querySelectorAll("[data-sim-in]").forEach((el) => (ins[el.dataset.simIn] = el));
+    sim.querySelectorAll("[data-sim-out]").forEach((el) => (outs[el.dataset.simOut] = el));
+    sim.querySelectorAll("[data-sim-bar]").forEach((el) => (bars[el.dataset.simBar] = el));
+
+    const brl = (v) => "R$ " + Math.round(v).toLocaleString("pt-BR");
+    const um = (v) => formatNumber(v, 1);
+    const EXTRA_MES = 52 / 12; // um fechamento por semana, em meses
+    const MENSALIDADES_ANO = 78; // 1+2+…+12: carteira somando mês a mês
+
+    function render() {
+      const leads = parseFloat(ins.leads.value);
+      const taxa = parseFloat(ins.taxa.value);
+      const ticket = parseFloat(ins.ticket.value);
+
+      const contratos = (leads * taxa) / 100;
+      const contratos2 = contratos + EXTRA_MES;
+      const receita = contratos * ticket;
+      const receita2 = contratos2 * ticket;
+
+      outs.leads.textContent = String(leads);
+      outs.taxa.textContent = taxa + "%";
+      outs.ticket.textContent = brl(ticket);
+      outs.contratos.textContent = um(contratos);
+      outs.contratos2.textContent = um(contratos2);
+      outs.receita.textContent = brl(receita);
+      outs.receita2.textContent = brl(receita2);
+      outs.ano.textContent = brl((receita2 - receita) * MENSALIDADES_ANO);
+
+      bars.a.style.width = (receita / Math.max(receita2, 1)) * 100 + "%";
+      bars.b.style.width = "100%";
+
+      // trilho preenchido até o polegar: o controle mostra onde está
+      Object.keys(ins).forEach((k) => {
+        const el = ins[k];
+        const min = parseFloat(el.min);
+        const p = ((parseFloat(el.value) - min) / (parseFloat(el.max) - min)) * 100;
+        el.style.background =
+          "linear-gradient(90deg, var(--sky) 0 " +
+          p +
+          "%, rgba(255,255,255,0.22) " +
+          p +
+          "% 100%)";
+      });
+    }
+
+    Object.keys(ins).forEach((k) => ins[k].addEventListener("input", render));
+    render();
+
+    // Ao entrar no slide as barras crescem do zero: o comparativo é o
+    // argumento, não a decoração.
+    simEnter = () => {
+      bars.a.style.width = "0%";
+      bars.b.style.width = "0%";
+      requestAnimationFrame(render);
+    };
+  })();
+
+  /* ---------- Inclinação dos mockups ---------- */
+
+  // A janela do produto segue o ponteiro em três dimensões: de longe parece
+  // um print, de perto parece um objeto.
+  (function initTilt() {
+    if (!animate) return;
+    const wins = Array.from(document.querySelectorAll(".app-window, .chat-window"));
+    if (!wins.length) return;
+    wins.forEach((el) => {
+      if (!el.classList.contains("float-soft")) el.classList.add("tiltable");
+    });
+
+    let tx = 0;
+    let ty = 0;
+    let cx = 0;
+    let cy = 0;
+    let raf = 0;
+
+    function frame() {
+      cx += (tx - cx) * 0.09;
+      cy += (ty - cy) * 0.09;
+      for (let i = 0; i < wins.length; i++) {
+        const el = wins[i];
+        const slide = el.closest(".slide");
+        if (!slide || !slide.classList.contains("is-active")) continue;
+        el.style.setProperty("--tilt-y", cx.toFixed(2) + "deg");
+        el.style.setProperty("--tilt-x", cy.toFixed(2) + "deg");
+      }
+      // para de girar sozinho quando já alcançou o alvo
+      if (Math.abs(tx - cx) > 0.01 || Math.abs(ty - cy) > 0.01) {
+        raf = requestAnimationFrame(frame);
+      } else {
+        raf = 0;
+      }
+    }
+
+    window.addEventListener(
+      "pointermove",
+      (e) => {
+        tx = (e.clientX / window.innerWidth - 0.5) * 2 * 5.5;
+        ty = -(e.clientY / window.innerHeight - 0.5) * 2 * 3.5;
+        if (!raf) raf = requestAnimationFrame(frame);
+      },
+      { passive: true }
+    );
+  })();
 
   function setFinalState(slide) {
     slide.querySelectorAll("[data-r], .msg, .pent-label").forEach((el) => {
@@ -464,6 +587,10 @@
       toggleIndex();
       return;
     }
+    // Com o foco num controle do simulador, as setas ajustam o valor: quem
+    // está mexendo nos números não quer trocar de slide sem querer.
+    const onControl = e.target instanceof Element && e.target.closest("input, select, textarea");
+    if (onControl && e.key !== "Escape") return;
     if (e.key === "p" || e.key === "P") {
       e.preventDefault();
       togglePresenter();

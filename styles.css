@@ -748,6 +748,12 @@ body.theme-light .fx-label.is-focus {
 
 /* ---------- Janelas / mockups ---------- */
 
+/* Perspectiva na coluna, não na janela: o mockup inclina seguindo o ponteiro
+   e ganha volume de objeto físico em cima da mesa. */
+.col-visual {
+  perspective: 1400px;
+}
+
 .app-window,
 .chat-window {
   background: var(--card);
@@ -1316,6 +1322,186 @@ body.theme-light .fx-label.is-focus {
 .compare__cell--after {
   color: var(--ink);
   font-weight: 500;
+}
+
+/* ---------- Simulador ---------- */
+
+.sim {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+  gap: 2.4rem;
+  margin-top: 2rem;
+  align-items: start;
+}
+
+.sim__controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  padding-top: 1.4rem;
+}
+
+.sim__field {
+  display: block;
+  cursor: pointer;
+}
+
+.sim__lbl {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0.7rem;
+}
+
+.sim__lbl b {
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Controle deslizante desenhado do zero: o padrão do sistema quebra a
+   linguagem de fios de 1px do resto do deck. */
+.sim__range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.22);
+  outline: none;
+  cursor: grab;
+}
+
+.sim__range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 22px;
+  border-radius: var(--r-sm);
+  background: var(--sky);
+  border: 1px solid #fff;
+  box-shadow: 0 0 0 6px rgba(110, 168, 255, 0.16);
+  transition: box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.sim__range::-moz-range-thumb {
+  width: 14px;
+  height: 22px;
+  border-radius: var(--r-sm);
+  background: var(--sky);
+  border: 1px solid #fff;
+  box-shadow: 0 0 0 6px rgba(110, 168, 255, 0.16);
+}
+
+.sim__range:hover::-webkit-slider-thumb,
+.sim__range:focus-visible::-webkit-slider-thumb {
+  background: #fff;
+  box-shadow: 0 0 0 8px rgba(110, 168, 255, 0.26);
+}
+
+.sim__range:focus-visible {
+  outline: 2px solid var(--sky);
+  outline-offset: 8px;
+}
+
+.sim__result {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem 1.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  /* a cena passa por trás: o painel precisa de chão próprio para os números
+     não competirem com as partículas */
+  background: rgba(7, 23, 38, 0.66);
+  padding: 1.5rem 1.6rem 1.3rem;
+}
+
+.sim__cap {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 0.55rem;
+}
+
+.sim__big {
+  font-family: var(--font-serif);
+  font-size: clamp(1.7rem, 2.6vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  margin: 0;
+}
+
+.sim__big i {
+  display: block;
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 0.5rem;
+}
+
+.sim__big--up {
+  color: var(--sky);
+}
+
+.sim__sub {
+  margin: 0.55rem 0 0;
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.sim__bars {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+}
+
+.sim__bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.sim__barfill {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: rgba(255, 255, 255, 0.45);
+  transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sim__barfill--up {
+  background: var(--sky);
+}
+
+.sim__year {
+  grid-column: 1 / -1;
+  margin: 0.5rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.sim__year b {
+  color: var(--sky);
+  font-size: 1rem;
+  letter-spacing: 0.02em;
 }
 
 /* ---------- Benefícios ---------- */
@@ -2066,17 +2252,24 @@ body.presenting .nav-button {
 
 /* ---------- Movimento ambiente ---------- */
 
+/* A flutuação e a inclinação vivem na mesma transformação: animação CSS
+   sobrepõe transform inline, então o ângulo entra por variável em vez de
+   ser escrito pelo JavaScript direto no elemento. */
 @keyframes floatSoft {
   from {
-    transform: translateY(-4px);
+    transform: translateY(-4px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
   }
   to {
-    transform: translateY(5px);
+    transform: translateY(5px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
   }
 }
 
 .float-soft {
   animation: floatSoft 6.5s ease-in-out infinite alternate;
+}
+
+.tiltable {
+  transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
 }
 
 /* ---------- Responsivo ---------- */
@@ -2104,6 +2297,16 @@ body.presenting .nav-button {
   .slide-inner--split {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  .sim {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+
+  .sim__result {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
   }
 
   .burden-stack {

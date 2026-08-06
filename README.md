@@ -25,7 +25,7 @@ O roteiro de cada slide vive no HTML, em `data-notes`, e é editável sem tocar 
 
 ## O organismo CORE5®
 
-Uma única nuvem de 2.000 partículas em WebGL atravessa o deck inteiro e muda de forma conforme a narrativa:
+Uma única nuvem de 2.800 partículas em WebGL atravessa o deck inteiro e muda de forma conforme a narrativa:
 
 | Formação | Onde aparece |
 |---|---|
@@ -41,6 +41,8 @@ A capa já abre no pentágono: o CORE5® é o assunto da apresentação, então 
 
 A formação é de cinco pontos de luz, sem nenhuma linha ligando um ao outro. Qualquer traço entre os vértices puxa a leitura para estrela, e o grafo completo desenha literalmente um pentagrama. Os cinco pilares aparecem como cinco núcleos, que é o que a metodologia é.
 
+Cada núcleo respira e gira em torno do próprio eixo, em fase própria: é o que separa cinco manchas paradas de cinco coisas vivas. O movimento acontece no shader, a partir do centro do nó que a partícula pertence, e custa zero de CPU.
+
 A cena tem três camadas: um campo distante que gira ao contrário e cria paralaxe, o organismo de 2.800 partículas e núcleos com brilho aditivo nos cinco vértices. Os rótulos fogem radialmente do centro, a uma distância proporcional ao tamanho do nó em tela, então ficam fora do halo em qualquer zoom ou proporção. A câmera voa entre cinco enquadramentos (`wide`, `close`, `low`, `hover`, `inside`) conforme a formação, e o deslocamento lateral é derivado do campo de visão, então a composição não estoura em nenhuma proporção de tela.
 
 Cada slide declara seu estado por atributo, sem tocar no JavaScript:
@@ -55,6 +57,18 @@ Cada slide declara seu estado por atributo, sem tocar no JavaScript:
 - `data-fx-x` — `center` quando a cena é o assunto do slide
 - `data-fx-labels="off"` — mostra a formação sem nomear os pilares
 - `data-fx-scale` e `data-fx-off` — afinam tamanho e deslocamento quando o slide tem texto grande do lado esquerdo
+
+## Simulação ao vivo (slide 21)
+
+O slide **Simulação** não é uma imagem: são três controles que o apresentador mexe na frente do cliente, com os números dele. Leads por mês, taxa de fechamento e ticket médio entram; contratos por mês, receita mensal nova e o acumulado de doze meses saem.
+
+O cenário comparado é sempre o mesmo: **um fechamento a mais por semana** (4,3 por mês). Toda a conta está escrita no rodapé do slide e não há coeficiente escondido, nem promessa de resultado — é aritmética com o que o cliente informar.
+
+Com o foco num controle, as setas ajustam o valor em vez de trocar de slide.
+
+## Mockups que respondem
+
+As janelas de produto (CRM, Academia) inclinam seguindo o ponteiro, em perspectiva real. A flutuação e a inclinação dividem a mesma transformação: como animação CSS sobrepõe `transform` inline, o ângulo entra por variável (`--tilt-x` / `--tilt-y`) dentro dos próprios keyframes.
 
 ## Degradação
 

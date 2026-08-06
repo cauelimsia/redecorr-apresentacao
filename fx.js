@@ -194,6 +194,7 @@ attribute vec3 aPosB;
 attribute float aSeed;
 attribute float aNodeA;
 attribute float aNodeB;
+attribute vec3 aCenter;
 varying float vAlpha;
 varying float vHi;
 
@@ -201,6 +202,19 @@ void main() {
   vec3 p = mix(aPosA, aPosB, uMorph);
 
   float s = aSeed * 6.2831853;
+
+  // Cada núcleo respira e gira em torno do próprio eixo, em fase própria:
+  // é o que separa "cinco manchas paradas" de cinco coisas vivas.
+  if (aNodeB >= 0.0) {
+    float ph = aNodeB * 1.2566 + aSeed * 0.9;
+    float breathe = 1.0 + sin(uTime * 0.8 + ph) * 0.13 * uMorph;
+    float spin = uTime * (0.16 + aNodeB * 0.012) * uMorph;
+    vec3 d = p - aCenter;
+    float c = cos(spin);
+    float sn = sin(spin);
+    d = vec3(d.x * c - d.y * sn, d.x * sn + d.y * c, d.z) * breathe;
+    p = aCenter + d;
+  }
   p.x += sin(uTime * 0.34 + s) * uDrift;
   p.y += cos(uTime * 0.28 + s * 1.7) * uDrift;
   p.z += sin(uTime * 0.22 + s * 2.3) * uDrift;
@@ -329,6 +343,15 @@ function boot() {
   geo.setAttribute("aNodeA", new THREE.BufferAttribute(nodeA, 1));
   geo.setAttribute("aNodeB", new THREE.BufferAttribute(nodeB, 1));
   geo.setAttribute("aSeed", new THREE.BufferAttribute(seed, 1));
+  // centro do nó a que a partícula pertence no pentágono: eixo da respiração
+  const center = new Float32Array(COUNT * 3);
+  for (let i = 0; i < COUNT; i++) {
+    const c = NODES[i % 5];
+    center[i * 3] = c.x;
+    center[i * 3 + 1] = c.y;
+    center[i * 3 + 2] = c.z;
+  }
+  geo.setAttribute("aCenter", new THREE.BufferAttribute(center, 3));
   geo.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 160);
 
   const uniforms = {
@@ -366,6 +389,7 @@ function boot() {
   coreGeo.setAttribute("aPosB", new THREE.BufferAttribute(corePos, 3));
   coreGeo.setAttribute("aNodeA", new THREE.BufferAttribute(coreNode, 1));
   coreGeo.setAttribute("aNodeB", new THREE.BufferAttribute(coreNode, 1));
+  coreGeo.setAttribute("aCenter", new THREE.BufferAttribute(corePos, 3));
   coreGeo.setAttribute("aSeed", new THREE.BufferAttribute(new Float32Array([0.1, 0.3, 0.5, 0.7, 0.9]), 1));
   coreGeo.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 40);
 
