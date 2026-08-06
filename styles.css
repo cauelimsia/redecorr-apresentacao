@@ -793,6 +793,54 @@ body.theme-light .fx-label.is-focus {
   margin-left: 0.5rem;
 }
 
+/* Tela real do produto dentro da janela */
+
+.shot {
+  position: relative;
+  overflow: hidden;
+}
+
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform-origin: 30% 20%;
+  animation: shotPan 32s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes shotPan {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.07) translate3d(-1.8%, -2.2%, 0);
+  }
+}
+
+.shot__tag {
+  position: absolute;
+  right: 0.6rem;
+  bottom: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--slate);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 0.28rem 0.5rem;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shot img {
+    animation: none;
+  }
+}
+
 /* Pipeline do CRM */
 
 .pipe {
@@ -2227,6 +2275,57 @@ body.presenting .nav-button {
   color: rgba(255, 255, 255, 0.6);
 }
 
+/* Parceiros */
+
+.partners {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r);
+  overflow: hidden;
+  max-width: 56rem;
+  margin: 2.4rem auto 0;
+}
+
+.partner {
+  grid-column: span 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 2rem 1rem 1.75rem;
+  background: var(--card);
+}
+
+.partner:nth-child(n + 5) {
+  grid-column: span 4;
+}
+
+.partner__num {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: var(--blue);
+}
+
+.partner__mark {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.source--center {
+  display: table;
+  margin-inline: auto;
+  text-align: center;
+}
+
 @media (max-width: 960px) {
   .presenter__grid {
     grid-template-columns: 1fr;
@@ -2302,6 +2401,31 @@ body.presenting .nav-button {
   .sim {
     grid-template-columns: 1fr;
     gap: 1.8rem;
+  }
+
+  .partners {
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 1.4rem;
+  }
+
+  .partners + .source--center {
+    margin-top: 0.8rem;
+    padding-top: 0.5rem;
+    margin-bottom: 3.2rem;
+  }
+
+  .partner,
+  .partner:nth-child(n + 5) {
+    grid-column: span 1;
+    padding: 1.4rem 0.8rem 1.2rem;
+  }
+
+  .partner:last-child {
+    grid-column: span 2;
+  }
+
+  .partner__mark {
+    font-size: 1.1rem;
   }
 
   .sim__result {

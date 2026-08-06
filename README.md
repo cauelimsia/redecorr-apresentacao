@@ -58,7 +58,19 @@ Cada slide declara seu estado por atributo, sem tocar no JavaScript:
 - `data-fx-labels="off"` — mostra a formação sem nomear os pilares
 - `data-fx-scale` e `data-fx-off` — afinam tamanho e deslocamento quando o slide tem texto grande do lado esquerdo
 
-## Simulação ao vivo (slide 21)
+## Telas reais do produto
+
+Os slides do pilar Tecnologia e da plataforma CRM mostram **capturas reais do CRM de produção** — o pipeline de leads e o dashboard executivo — dentro do chrome de janela do deck, com um pan lento contínuo (efeito Ken Burns) e a inclinação que segue o ponteiro.
+
+Antes de cada captura, **todo dado real foi substituído por dado fictício direto no DOM**: nomes de leads, telefones, valores, iniciais de avatar, fotos de perfil e nomes de consultores. Nenhum dado real de lead aparece em material público. Cada captura carrega o selo "Tela real · dados fictícios" no canto — o que é transparência, não rodapé jurídico.
+
+A Academia de Vendas segue com o mockup de simulação até existir acesso público ao app para capturar do mesmo jeito.
+
+## Parceiros (slide 19)
+
+Fecho do capítulo das plataformas: as sete operadoras e administradoras parceiras (Plano A, Select, Go Care, Salv, OdontoGroup, Saúde Prime e Rede Total) numa parede tipográfica uniforme — grade retangular 4 + 3 com divisores de 1px, numeração em Mono e marcas em Serif. Sem logos de terceiros: tratamento tipográfico único mantém a página com cara de relatório institucional e evita disputa visual entre marcas.
+
+## Simulação ao vivo (slide 22)
 
 O slide **Simulação** não é uma imagem: são três controles que o apresentador mexe na frente do cliente, com os números dele. Leads por mês, taxa de fechamento e ticket médio entram; contratos por mês, receita mensal nova e o acumulado de doze meses saem.
 
@@ -68,7 +80,7 @@ Com o foco num controle, as setas ajustam o valor em vez de trocar de slide.
 
 ## Mockups que respondem
 
-As janelas de produto (CRM, Academia) inclinam seguindo o ponteiro, em perspectiva real. A flutuação e a inclinação dividem a mesma transformação: como animação CSS sobrepõe `transform` inline, o ângulo entra por variável (`--tilt-x` / `--tilt-y`) dentro dos próprios keyframes.
+As janelas de produto (telas reais do CRM, mockup da Academia) inclinam seguindo o ponteiro, em perspectiva real. A flutuação e a inclinação dividem a mesma transformação: como animação CSS sobrepõe `transform` inline, o ângulo entra por variável (`--tilt-x` / `--tilt-y`) dentro dos próprios keyframes.
 
 ## Degradação
 
