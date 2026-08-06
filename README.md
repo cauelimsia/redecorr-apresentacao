@@ -29,13 +29,17 @@ Uma única nuvem de 2.000 partículas em WebGL atravessa o deck inteiro e muda d
 
 | Formação | Onde aparece |
 |---|---|
+| `pentagon` | a capa e a metodologia CORE5®, travada em formação |
 | `chaos` | o corretor que trabalha sozinho, sem estrutura |
-| `pentagon` | a metodologia CORE5®, travada em formação |
 | `grid` | o chão de dados do slide de mercado |
 | `constellation` | o ecossistema, aberto |
 | `burst` | o convite final |
 
 Nos slides de pilar o nó correspondente acende e a formação gira para apresentá-lo. Os rótulos dos pilares são HTML posicionado a cada quadro sobre os nós 3D, então continuam nítidos em qualquer resolução.
+
+A capa já abre no pentágono: o CORE5® é o assunto da apresentação, então ele é a primeira coisa que a sala vê, ainda sem os nomes dos pilares (a nomeação é a virada do capítulo da metodologia).
+
+O pentágono usa só o anel externo. O grafo completo, com as cinco diagonais, desenha literalmente um pentagrama, leitura esotérica que não cabe aqui.
 
 A cena tem três camadas: um campo distante que gira ao contrário e cria paralaxe, o organismo de 2.800 partículas e núcleos com brilho aditivo nos cinco vértices. As arestas do pentágono não aparecem prontas — elas se desenham escalonadas, como um circuito ligando. A câmera voa entre cinco enquadramentos (`wide`, `close`, `low`, `hover`, `inside`) conforme a formação, e o deslocamento lateral é derivado do campo de visão, então a composição não estoura em nenhuma proporção de tela.
 
@@ -49,6 +53,8 @@ Cada slide declara seu estado por atributo, sem tocar no JavaScript:
 - `data-fx-focus` — pilar em destaque (1 a 5)
 - `data-fx-dim` — recua a cena sob conteúdo denso
 - `data-fx-x` — `center` quando a cena é o assunto do slide
+- `data-fx-labels="off"` — mostra a formação sem nomear os pilares
+- `data-fx-scale` e `data-fx-off` — afinam tamanho e deslocamento quando o slide tem texto grande do lado esquerdo
 
 ## Degradação
 

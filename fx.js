@@ -43,9 +43,11 @@ for (let i = 0; i < 5; i++) {
   NODES.push(new THREE.Vector3(Math.cos(a) * R, -Math.sin(a) * R, 0));
 }
 
-// Grafo completo K5: as dez arestas
+// Só o anel externo. O grafo completo K5 desenha as cinco diagonais, e
+// pentágono com diagonais é literalmente o pentagrama — leitura esotérica
+// que não cabe numa apresentação institucional.
 const EDGES = [];
-for (let i = 0; i < 5; i++) for (let j = i + 1; j < 5; j++) EDGES.push([i, j]);
+for (let i = 0; i < 5; i++) EDGES.push([i, (i + 1) % 5]);
 
 /* ---------- formações ---------- */
 
@@ -605,6 +607,8 @@ function boot() {
     if (dim) op *= form === "pentagon" ? 0.3 : 0.4;
     if (form === "pentagon" && !dim) op = light ? 0.8 : 1;
     if (place === "center" && !dim) op *= 0.48;
+    // no celular a cena fica atrás do texto, não ao lado dele
+    if (narrow) op *= 0.7;
     tween(uniforms.uOpacity, { value: op, duration: 0.9, ease: "power2.out" });
 
     // campo distante: só respira nos slides escuros, some no papel
@@ -649,14 +653,20 @@ function boot() {
     const halfH = Math.tan((45 * Math.PI) / 360) * cam.pos[2];
     const halfW = halfH * camera.aspect;
 
+    // data-fx-off e data-fx-scale afinam a composição quando o slide tem
+    // texto grande do lado esquerdo (a capa é o caso).
+    const off = parseFloat(el.dataset.fxOff);
+    const sAttr = parseFloat(el.dataset.fxScale);
+
     tween(group.position, {
-      x: place === "center" ? 0 : halfW * 0.42,
+      x: place === "center" ? 0 : halfW * (Number.isFinite(off) ? off : 0.42),
       duration: 1.4,
       ease: "power3.out",
       overwrite: true,
     });
 
-    const s = (form === "pentagon" && dim ? 0.82 : 1) * narrowScale();
+    const base = Number.isFinite(sAttr) ? sAttr : form === "pentagon" && dim ? 0.82 : 1;
+    const s = base * narrowScale();
     tween(group.scale, { x: s, y: s, z: s, duration: 1.4, ease: "power3.out", overwrite: true });
 
     let ry = 0;
@@ -670,7 +680,10 @@ function boot() {
       ease: "power2.out",
     });
 
-    setLabels(form === "pentagon" && !dim && !narrow && place !== "center");
+    // data-fx-labels="off": a capa mostra o pentágono sem nomear os pilares —
+    // os nomes são a revelação do capítulo da metodologia.
+    const noLabels = el.dataset.fxLabels === "off";
+    setLabels(form === "pentagon" && !dim && !narrow && !noLabels && place !== "center");
 
     if (reduced) requestAnimationFrame(render);
   }
@@ -748,10 +761,17 @@ function boot() {
 
   document.documentElement.classList.add("fx-on");
 
-  // Abertura: as partículas convergem do longe para a primeira formação
+  // Abertura: as partículas convergem do longe para a formação do primeiro
+  // slide, seja ela qual for (a capa abre direto no pentágono CORE5®).
   function intro() {
     const active = document.querySelector(".slide.is-active");
-    state.form = "constellation";
+    const first = (active && active.dataset.fx) || "constellation";
+    const f = FORMS[first] || FORMS.constellation;
+    geo.attributes.aPosB.array.set(f.pos);
+    geo.attributes.aNodeB.array.set(f.node);
+    geo.attributes.aPosB.needsUpdate = true;
+    geo.attributes.aNodeB.needsUpdate = true;
+    state.form = first;
     if (reduced) {
       uniforms.uMorph.value = 1;
       if (active) setSlide(active);
