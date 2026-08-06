@@ -202,6 +202,13 @@ body.theme-light .fx-label.is-focus {
   align-items: center;
 }
 
+/* Slides onde o produto em vídeo é o protagonista: a janela ganha a maior
+   parte da largura para o texto da interface ficar legível. */
+.slide-inner--visual-hero {
+  grid-template-columns: minmax(0, 0.68fr) minmax(0, 1.32fr);
+  gap: clamp(1.6rem, 3vw, 3rem);
+}
+
 .slide-inner--center {
   text-align: center;
   display: flex;
@@ -969,6 +976,12 @@ body.theme-light .fx-label.is-focus {
   gap: 0;
   margin-top: 2.6rem;
   border-top: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.arch--3 {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 60rem;
+  margin-inline: auto;
 }
 
 .arch__mod {
