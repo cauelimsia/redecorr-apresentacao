@@ -6,10 +6,10 @@
 
 **Apresentação institucional em WebGL — 26 slides, uma única nuvem de 2.800 partículas**
 
-[![three.js](https://img.shields.io/badge/three.js-000000?style=for-the-badge&logo=threedotjs&logoColor=white)](https://threejs.org)
-[![WebGL](https://img.shields.io/badge/WebGL-990000?style=for-the-badge&logo=webgl&logoColor=white)](https://get.webgl.org)
-[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](#)
-[![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-222222?style=for-the-badge&logo=githubpages&logoColor=white)](https://cauelimsia.github.io/redecorr-apresentacao/)
+<a href="https://threejs.org"><img height="34" src="https://img.shields.io/badge/three.js-000000?style=flat&logo=threedotjs&logoColor=white" alt="three.js"></a>
+<a href="https://get.webgl.org"><img height="34" src="https://img.shields.io/badge/WebGL-990000?style=flat&logo=webgl&logoColor=white" alt="WebGL"></a>
+<a href="#"><img height="34" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black" alt="JavaScript"></a>
+<a href="https://cauelimsia.github.io/redecorr-apresentacao/"><img height="34" src="https://img.shields.io/badge/GitHub_Pages-222222?style=flat&logo=githubpages&logoColor=white" alt="GitHub Pages"></a>
 
 **[▶ Abrir a apresentação](https://cauelimsia.github.io/redecorr-apresentacao/)** · [O organismo CORE5®](#-o-organismo-core5) · [Modo apresentador](#-modo-apresentador) · [Rodar local](#-rodar-local)
 
