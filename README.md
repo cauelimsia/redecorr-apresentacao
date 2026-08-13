@@ -2,7 +2,7 @@
 
 Apresentação institucional da RedeCORR, o ecossistema de crescimento para corretores de planos de saúde, e da metodologia CORE5®.
 
-**Ao vivo:** https://clsolucoesweb.github.io/redecorr-apresentacao/
+**Ao vivo:** https://cauelimsia.github.io/redecorr-apresentacao/
 
 ## Navegação
 
